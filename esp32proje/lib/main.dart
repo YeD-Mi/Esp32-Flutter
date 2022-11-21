@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       getPages: getPages,
-      home: LoginPage(),
+      home: const LoginPage(),
     );
   }
 }
