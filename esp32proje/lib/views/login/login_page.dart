@@ -59,7 +59,7 @@ Widget _buildLoginForm() {
             decoration: BoxDecoration(
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.white.withOpacity(0.7),
+                    color: floor.withOpacity(0.7),
                     blurRadius: 10,
                   )
                 ],
@@ -81,7 +81,7 @@ Widget _buildLoginForm() {
             decoration: BoxDecoration(
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.white.withOpacity(0.7),
+                    color: floor.withOpacity(0.7),
                     blurRadius: 10,
                   )
                 ],
