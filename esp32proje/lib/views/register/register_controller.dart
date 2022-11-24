@@ -2,8 +2,6 @@ import 'package:esp32proje/data/services/register/model/register_request.dart';
 import 'package:esp32proje/data/services/register/model/register_response.dart';
 import 'package:esp32proje/data/services/register/register_service.dart';
 import 'package:get/state_manager.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get_rx/src/rx_types/rx_types.dart';
 
 class RegisterController extends GetxController {
   void callingRegisterService(
@@ -16,9 +14,9 @@ class RegisterController extends GetxController {
     );
     isLoading.call(true);
     _registerService.register(_userReguest).then((user) {
-      isRegister.call(true);
+      print("Basarili");
     }).catchError((dynamic error) {
-      this.error.trigger(error);
+      print(error);
     }).whenComplete(() {
       isLoading.call(false);
     });
@@ -35,8 +33,6 @@ class RegisterController extends GetxController {
   ];
 
   final Rx<bool> isLoading = RxBool(false);
-  final Rxn<dynamic> error = Rxn<dynamic>();
-  final RxBool isRegister = RxBool(false);
   final Rxn<RegisterResponseModel> user = Rxn();
   final RegisterService _registerService;
   RegisterController(this._registerService);

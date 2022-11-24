@@ -10,7 +10,10 @@ import 'package:get/state_manager.dart';
 import 'package:http/http.dart';
 
 String dropdownValue = RegisterController(Get.find()).list.last;
-late String username, eposta, password, againpassword;
+String username = "";
+String eposta = "";
+String password = "";
+String againpassword = "";
 
 class RegisterPage extends GetWidget<RegisterController> {
   const RegisterPage({Key? key}) : super(key: key);
@@ -18,14 +21,6 @@ class RegisterPage extends GetWidget<RegisterController> {
 
   @override
   Widget build(BuildContext context) {
-    controller.isRegister.listen((isRegister) {
-      if (isRegister) Get.toNamed(LoginPage.routeName);
-    });
-
-    controller.error.listen((error) {
-      Get.snackbar(mistaketitle, mistakecomment,
-          colorText: primaryColor, backgroundColor: borderColor);
-    });
     return Scaffold(
         appBar: AppBar(
           title: Center(child: const Text(registerapptxt)),
@@ -33,142 +28,214 @@ class RegisterPage extends GetWidget<RegisterController> {
         ),
         body: _buildBody());
   }
-}
 
-Widget _buildBody() {
-  return SingleChildScrollView(
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.end,
+  Widget _buildBody() {
+    return SingleChildScrollView(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          Padding(
+            padding: EdgeInsets.all(Get.height * 0.01),
+            child: _buildImage(),
+          ),
+          Padding(
+            padding: EdgeInsets.only(
+                bottom: Get.height * 0.03,
+                left: Get.height * 0.02,
+                right: Get.height * 0.02,
+                top: Get.height * 0.02),
+            child: _buildRegisterForm(),
+          ),
+          DropdownRegion(),
+          _buildButton()
+        ],
+      ),
+    );
+  }
+
+  Widget _buildRegisterForm() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Material(
+          elevation: 10,
+          color: Colors.white,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+                topRight: Radius.circular(250),
+                topLeft: Radius.circular(10),
+                bottomLeft: Radius.circular(10),
+                bottomRight: Radius.circular(10)),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(20, 3, 15, 3),
+            child: TextField(
+              onChanged: (value) {
+                eposta = value;
+              },
+              textInputAction: TextInputAction.next,
+              decoration: InputDecoration(
+                  border: InputBorder.none, hintText: registermail),
+            ),
+          ),
+        ),
+        SizedBox(height: Get.height * 0.01),
+        Material(
+          elevation: 10,
+          color: Colors.white,
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(10))),
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(20, 3, 15, 3),
+            child: TextField(
+              onChanged: (value) {
+                username = value;
+              },
+              textInputAction: TextInputAction.next,
+              decoration: InputDecoration(
+                  border: InputBorder.none, hintText: registernick),
+            ),
+          ),
+        ),
+        SizedBox(height: Get.height * 0.01),
+        Material(
+          elevation: 10,
+          color: Colors.white,
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(10))),
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(20, 3, 15, 3),
+            child: TextField(
+              onChanged: (value) {
+                password = value;
+              },
+              obscureText: true,
+              textInputAction: TextInputAction.next,
+              decoration: InputDecoration(
+                  border: InputBorder.none, hintText: registerpassword),
+            ),
+          ),
+        ),
+        SizedBox(height: Get.height * 0.01),
+        Material(
+          elevation: 10,
+          color: Colors.white,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+              bottomRight: Radius.circular(250),
+              bottomLeft: Radius.circular(10),
+              topLeft: Radius.circular(10),
+              topRight: Radius.circular(10),
+            ),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(20, 3, 15, 3),
+            child: TextField(
+              onChanged: (value) {
+                againpassword = value;
+              },
+              obscureText: true,
+              textInputAction: TextInputAction.next,
+              decoration: InputDecoration(
+                  border: InputBorder.none, hintText: againpasswordtxt),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildImage() {
+    return Column(
+      children: [
+        Container(
+          width: Get.width,
+          height: Get.height * 0.27,
+          decoration: BoxDecoration(
+            color: primaryColor,
+            image: DecorationImage(
+              colorFilter: ColorFilter.mode(
+                  primaryColor.withOpacity(0.9), BlendMode.dstATop),
+              image: AssetImage(lamp),
+              fit: BoxFit.cover,
+            ),
+          ),
+        )
+      ],
+    );
+  }
+
+  Widget _buildButton() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Padding(
-          padding: EdgeInsets.all(Get.height * 0.01),
-          child: _buildImage(),
+          padding: EdgeInsets.symmetric(horizontal: Get.width * 0.1),
+          child: ElevatedButton(
+              onPressed: () => _onTap(),
+              style: ElevatedButton.styleFrom(
+                padding: EdgeInsets.all(2),
+                primary: primaryColor,
+                shape: StadiumBorder(),
+                side: BorderSide(color: borderColor, width: 2),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: const Text(
+                  signupbutton,
+                  style: const TextStyle(fontSize: 18),
+                ),
+              )),
         ),
-        Padding(
-          padding: EdgeInsets.only(
-              bottom: Get.height * 0.03,
-              left: Get.height * 0.02,
-              right: Get.height * 0.02,
-              top: Get.height * 0.02),
-          child: _buildRegisterForm(),
-        ),
-        DropdownRegion(),
-        _buildButton()
       ],
-    ),
-  );
-}
+    );
+  }
 
-Widget _buildRegisterForm() {
-  return Column(
-    crossAxisAlignment: CrossAxisAlignment.stretch,
-    children: [
-      Material(
-        elevation: 10,
-        color: Colors.white,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-              topRight: Radius.circular(250),
-              topLeft: Radius.circular(10),
-              bottomLeft: Radius.circular(10),
-              bottomRight: Radius.circular(10)),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(20, 3, 15, 3),
-          child: TextField(
-            onChanged: (value) {
-              eposta = value;
-            },
-            textInputAction: TextInputAction.next,
-            decoration: InputDecoration(
-                border: InputBorder.none, hintText: registermail),
-          ),
-        ),
-      ),
-      SizedBox(height: Get.height * 0.01),
-      Material(
-        elevation: 10,
-        color: Colors.white,
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(10))),
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(20, 3, 15, 3),
-          child: TextField(
-            onChanged: (value) {
-              username = value;
-            },
-            textInputAction: TextInputAction.next,
-            decoration: InputDecoration(
-                border: InputBorder.none, hintText: registernick),
-          ),
-        ),
-      ),
-      SizedBox(height: Get.height * 0.01),
-      Material(
-        elevation: 10,
-        color: Colors.white,
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(10))),
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(20, 3, 15, 3),
-          child: TextField(
-            onChanged: (value) {
-              password = value;
-            },
-            obscureText: true,
-            textInputAction: TextInputAction.next,
-            decoration: InputDecoration(
-                border: InputBorder.none, hintText: registerpassword),
-          ),
-        ),
-      ),
-      SizedBox(height: Get.height * 0.01),
-      Material(
-        elevation: 10,
-        color: Colors.white,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-            bottomRight: Radius.circular(250),
-            bottomLeft: Radius.circular(10),
-            topLeft: Radius.circular(10),
-            topRight: Radius.circular(10),
-          ),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(20, 3, 15, 3),
-          child: TextField(
-            onChanged: (value) {
-              againpassword = value;
-            },
-            obscureText: true,
-            textInputAction: TextInputAction.next,
-            decoration: InputDecoration(
-                border: InputBorder.none, hintText: againpasswordtxt),
-          ),
-        ),
-      ),
-    ],
-  );
-}
-
-Widget _buildImage() {
-  return Column(
-    children: [
-      Container(
-        width: Get.width,
-        height: Get.height * 0.27,
-        decoration: BoxDecoration(
-          color: primaryColor,
-          image: DecorationImage(
-            colorFilter: ColorFilter.mode(
-                primaryColor.withOpacity(0.9), BlendMode.dstATop),
-            image: AssetImage(lamp),
-            fit: BoxFit.cover,
-          ),
-        ),
-      )
-    ],
-  );
+  void _onTap() {
+    if (username.isNotEmpty &&
+        eposta.isNotEmpty &&
+        dropdownValue.isNotEmpty &&
+        password.isNotEmpty) {
+      if (password == againpassword) {
+        RegisterController(Get.find()).callingRegisterService(
+          username,
+          eposta,
+          dropdownValue,
+          password,
+        );
+        Get.snackbar(welcometxt + username, successfultxt,
+            icon: Icon(Icons.back_hand_outlined, color: positiveclr),
+            colorText: borderColor,
+            backgroundColor: floor,
+            duration: Duration(seconds: 4),
+            titleText: Text(
+              welcometxt + username,
+              style: TextStyle(fontSize: 20),
+            ));
+        Get.offNamed(LoginPage.routeName);
+      } else {
+        Get.snackbar(mistaketitle, passworderror,
+            icon: Icon(Icons.error_outline_outlined, color: primaryColor),
+            colorText: borderColor,
+            backgroundColor: floor,
+            duration: Duration(seconds: 4),
+            titleText: Text(
+              mistaketitle,
+              style: TextStyle(fontSize: 20),
+            ));
+      }
+    } else {
+      Get.snackbar(mistaketitle, mistakecomment,
+          icon: Icon(Icons.error_outline_outlined, color: primaryColor),
+          colorText: borderColor,
+          backgroundColor: floor,
+          duration: Duration(seconds: 4),
+          titleText: Text(
+            mistaketitle,
+            style: TextStyle(fontSize: 20),
+          ));
+    }
+  }
 }
 
 class DropdownRegion extends StatefulWidget {
@@ -221,77 +288,5 @@ class _DropdownButton extends State<DropdownRegion> {
         ],
       ),
     );
-  }
-}
-
-Widget _buildButton() {
-  return Column(
-    crossAxisAlignment: CrossAxisAlignment.stretch,
-    children: [
-      Padding(
-        padding: EdgeInsets.symmetric(horizontal: Get.width * 0.1),
-        child: ElevatedButton(
-            onPressed: () => _onTap(),
-            style: ElevatedButton.styleFrom(
-              padding: EdgeInsets.all(2),
-              primary: primaryColor,
-              shape: StadiumBorder(),
-              side: BorderSide(color: borderColor, width: 2),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: const Text(
-                signupbutton,
-                style: const TextStyle(fontSize: 18),
-              ),
-            )),
-      ),
-    ],
-  );
-}
-
-void _onTap() {
-  if (username.isNotEmpty &&
-      eposta.isNotEmpty &&
-      dropdownValue.isNotEmpty &&
-      password.isNotEmpty) {
-    if (password == againpassword) {
-      RegisterController(Get.find()).callingRegisterService(
-        username,
-        eposta,
-        dropdownValue,
-        password,
-      );
-      Get.snackbar(welcometxt + username, successfultxt,
-          icon: Icon(Icons.back_hand_outlined, color: positiveclr),
-          colorText: borderColor,
-          backgroundColor: floor,
-          duration: Duration(seconds: 4),
-          titleText: Text(
-            welcometxt + username,
-            style: TextStyle(fontSize: 20),
-          ));
-      Get.offNamed(LoginPage.routeName);
-    } else {
-      Get.snackbar(mistaketitle, passworderror,
-          icon: Icon(Icons.error_outline_outlined, color: primaryColor),
-          colorText: borderColor,
-          backgroundColor: floor,
-          duration: Duration(seconds: 4),
-          titleText: Text(
-            mistaketitle,
-            style: TextStyle(fontSize: 20),
-          ));
-    }
-  } else {
-    Get.snackbar(mistaketitle, mistakecomment,
-        icon: Icon(Icons.error_outline_outlined, color: primaryColor),
-        colorText: borderColor,
-        backgroundColor: floor,
-        duration: Duration(seconds: 4),
-        titleText: Text(
-          mistaketitle,
-          style: TextStyle(fontSize: 20),
-        ));
   }
 }

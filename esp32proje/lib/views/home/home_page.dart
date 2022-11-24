@@ -10,7 +10,7 @@ class HomePage extends GetWidget<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Text('HomePage'),
+      child: Center(child: Text('HomePage')),
     );
   }
 }

@@ -4,6 +4,8 @@ const String loginbutton = 'Giriş Yap';
 const String signupbutton = 'Kayıt Ol';
 const String usernametxt = 'Kullanıcı Adı';
 const String passwordtxt = 'Şifre';
+const String noUsertxt = 'Kullanici Yok';
+const String wrongPasswordtxt = 'Yanlis Parola';
 
 //Register Page
 const String registerapptxt = 'Üye Kaydı';
@@ -19,4 +21,5 @@ const String successfultxt = 'Kayit Basarili.';
 const String welcometxt = 'Hosgeldin ';
 
 //http
-final String urltxt = 'http://sub.mryed.com/esp32/register.php';
+final String registerUrl = 'http://sub.mryed.com/esp32/register.php';
+final String loginUrl = 'http://sub.mryed.com/esp32/login.php';

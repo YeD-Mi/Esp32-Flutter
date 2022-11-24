@@ -10,8 +10,8 @@ abstract class RegisterService {
 class RegisterServiceImp extends RegisterService {
   @override
   Future register(RegisterRequestModel registerRequestModel) async {
-    final response =
-        await http.post(Uri.parse(urltxt), body: registerRequestModel.toJson());
+    final response = await http.post(Uri.parse(registerUrl),
+        body: registerRequestModel.toJson());
 
     if (response.statusCode == 200) {
       print(successfultxt);
