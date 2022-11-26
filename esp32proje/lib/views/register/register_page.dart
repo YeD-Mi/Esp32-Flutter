@@ -212,7 +212,7 @@ class RegisterPage extends GetWidget<RegisterController> {
               welcometxt + username,
               style: TextStyle(fontSize: 20),
             ));
-        Get.offNamed(LoginPage.routeName);
+        Get.offAndToNamed(LoginPage.routeName);
       } else {
         Get.snackbar(mistaketitle, passworderror,
             icon: Icon(Icons.error_outline_outlined, color: primaryColor),

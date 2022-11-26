@@ -14,13 +14,13 @@ class LoginPage extends GetWidget<LoginController> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    controller.error.listen((error) => print("Hata"));
-    controller.isLogin.listen((isLogin) {
-      if (isLogin) Get.offNamed(HomePage.routeName);
-    });
-    controller.errorTexts.listen((errorTexts) {
-      if (errorTexts != null) print(errorTexts);
-    });
+    // controller.error.listen((error) => print("Hata"));
+    // controller.isLogin.listen((isLogin) {
+    //   if (isLogin) Get.offNamed(HomePage.routeName);
+    // });
+    // controller.errorTexts.listen((errorTexts) {
+    //   if (errorTexts != null) print(errorTexts);
+    // });
     return Scaffold(
         appBar: AppBar(
           title: Center(child: Text(loginappbar)),
@@ -128,7 +128,7 @@ class LoginPage extends GetWidget<LoginController> {
                   )),
               ElevatedButton(
                   onPressed: () {
-                    Get.offNamed(RegisterPage.routeName);
+                    Get.offAndToNamed(RegisterPage.routeName);
                   },
                   style: ElevatedButton.styleFrom(
                     padding:
@@ -161,7 +161,7 @@ class LoginPage extends GetWidget<LoginController> {
           controller.usernameController.text,
           controller.passwordControler.text);
     } else {
-      Get.snackbar(mistaketitle, passworderror,
+      Get.snackbar(mistaketitle, mistakecomment,
           icon: Icon(Icons.error_outline_outlined, color: primaryColor),
           colorText: borderColor,
           backgroundColor: floor,
