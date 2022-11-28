@@ -8,7 +8,6 @@ import 'package:get/state_manager.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../home/home_page.dart';
 
 class LoginController extends GetxController {
@@ -44,9 +43,19 @@ class LoginController extends GetxController {
               style: TextStyle(fontSize: 20),
             ));
       }
-
       if (user.statu == 0) {
         Get.snackbar(mistaketitle, noUsertxt,
+            icon: Icon(Icons.error_outline_outlined, color: primaryColor),
+            colorText: borderColor,
+            backgroundColor: floor,
+            duration: Duration(seconds: 4),
+            titleText: Text(
+              mistaketitle,
+              style: TextStyle(fontSize: 20),
+            ));
+      }
+      if (user.statu == 3) {
+        Get.snackbar(mistaketitle, deletedusertxt,
             icon: Icon(Icons.error_outline_outlined, color: primaryColor),
             colorText: borderColor,
             backgroundColor: floor,
