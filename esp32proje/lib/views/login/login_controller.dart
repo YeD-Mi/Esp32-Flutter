@@ -3,11 +3,10 @@ import 'package:esp32proje/data/services/login/model/login_request.dart';
 import 'package:esp32proje/data/services/login/model/login_response.dart';
 import 'package:esp32proje/data/src/colors.dart';
 import 'package:esp32proje/data/src/string.dart';
-import 'package:flutter/material.dart';
-import 'package:get/state_manager.dart';
-import 'package:flutter/gestures.dart';
+import 'package:esp32proje/views/admin/admin_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../common/common_values.dart';
 import '../home/home_page.dart';
 
 class LoginController extends GetxController {
@@ -30,7 +29,42 @@ class LoginController extends GetxController {
     _loginService.login(requestModel).then((user) {
       if (user.statu == 2) {
         isLogin.call(true);
-        Get.offAndToNamed(HomePage.routeName);
+        loginuser.value = user.username;
+        loginregion.value = user.region;
+        print(user.region);
+        switch (user.region) {
+          case 'Genel':
+            Get.toNamed(AdminPage.routeName);
+            break;
+          case 'Ege':
+            regionUrl.call('http://sub.mryed.com/esp32/get_ege.php');
+            Get.toNamed(HomePage.routeName);
+            break;
+          case 'Marmara':
+            regionUrl.call('http://sub.mryed.com/esp32/get_marmara.php');
+            Get.toNamed(HomePage.routeName);
+            break;
+          case 'Karadeniz':
+            regionUrl.call('http://sub.mryed.com/esp32/get_karadeniz.php');
+            Get.toNamed(HomePage.routeName);
+            break;
+          case 'Dogu':
+            regionUrl.call('http://sub.mryed.com/esp32/get_dogu.php');
+            Get.toNamed(HomePage.routeName);
+            break;
+          case 'Akdeniz':
+            regionUrl.call('http://sub.mryed.com/esp32/get_akdeniz.php');
+            Get.toNamed(HomePage.routeName);
+            break;
+          case 'Guney Dogu':
+            regionUrl.call('http://sub.mryed.com/esp32/get_guneydogu.php');
+            Get.toNamed(HomePage.routeName);
+            break;
+          case 'Ic Anadolu':
+            regionUrl.call('http://sub.mryed.com/esp32/get_icanadolu.php');
+            Get.toNamed(HomePage.routeName);
+            break;
+        }
       }
       if (user.statu == 1) {
         Get.snackbar(mistaketitle, wrongPasswordtxt,
@@ -65,8 +99,6 @@ class LoginController extends GetxController {
               style: TextStyle(fontSize: 20),
             ));
       }
-
-      // userId.value = user.userId;
     }).catchError((dynamic error) {
       this.error.trigger(error);
     }).whenComplete(() {

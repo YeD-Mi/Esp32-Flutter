@@ -27,7 +27,7 @@ class RegisterController extends GetxController {
     'Ege',
     'Karadeniz',
     'Dogu',
-    'Güney Dogu',
+    'Guney Dogu',
     'Marmara',
     'Ic Anadolu',
   ];

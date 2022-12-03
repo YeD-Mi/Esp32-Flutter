@@ -1,4 +1,6 @@
+import 'package:esp32proje/data/services/users/model/users_response.dart';
 import 'package:esp32proje/data/services/users/user_service.dart';
+import 'package:flutter/material.dart';
 import 'package:get/state_manager.dart';
 
 class UsersController extends GetxController {

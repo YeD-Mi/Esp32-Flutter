@@ -9,11 +9,13 @@ class LoginResponseModel {
   final String? userId;
   final String? username;
   final bool? admin;
+  final String? region;
 
   LoginResponseModel.fromJson(Map<dynamic, dynamic> json)
       : statu = json["STATU"],
         message = json["MESSAGE"] == null ? null : json["MESSAGE"],
         userId = json["USER_ID"] == null ? null : json["USER_ID"],
         username = json["USERNAME"] == null ? null : json["USERNAME"],
-        admin = json["ADMIN"] == null ? null : json["ADMIN"];
+        admin = json["ADMIN"],
+        region = json["REGION"] == null ? null : json["REGION"];
 }

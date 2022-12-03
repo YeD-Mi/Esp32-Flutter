@@ -1,11 +1,12 @@
+import 'package:esp32proje/data/src/string.dart';
 import 'package:get/get.dart';
 import '../../data/services/home/home.service.dart';
 import 'package:get/state_manager.dart';
+import 'package:esp32proje/data/src/string.dart';
 
 class HomeController extends GetxController {
   final Rx<bool> isLoading = RxBool(false);
   final Rxn<dynamic> error = Rxn<dynamic>();
-
   final Rxn<List> dataIdList = Rxn();
   final Rxn<List> dataCurrentList = Rxn();
   final Rxn<List> dataVoltageList = Rxn();
@@ -13,7 +14,6 @@ class HomeController extends GetxController {
   final Rxn<List> dataDateList = Rxn();
 
   final HomeService _homeService;
-
   HomeController(this._homeService);
 
   @override
@@ -28,7 +28,7 @@ class HomeController extends GetxController {
 
   void _callingGetDataID() {
     isLoading.call(true);
-    _homeService.getdataid().then((value) {
+    _homeService.getdataid(regionUrl.string).then((value) {
       dataIdList.value = value;
     }).catchError((dynamic error) {
       this.error.trigger(error);
@@ -40,7 +40,7 @@ class HomeController extends GetxController {
 
   void _callingGetDataCurrent() {
     isLoading.call(true);
-    _homeService.getdataCurrent().then((value) {
+    _homeService.getdataCurrent(regionUrl.string).then((value) {
       dataCurrentList.value = value;
     }).catchError((dynamic error) {
       this.error.trigger(error);
@@ -52,7 +52,7 @@ class HomeController extends GetxController {
 
   void _callingGetDataVoltage() {
     isLoading.call(true);
-    _homeService.getdataVoltage().then((value) {
+    _homeService.getdataVoltage(regionUrl.string).then((value) {
       dataVoltageList.value = value;
     }).catchError((dynamic error) {
       this.error.trigger(error);
@@ -64,7 +64,7 @@ class HomeController extends GetxController {
 
   void _callingGetDataTemperature() {
     isLoading.call(true);
-    _homeService.getdataTemperature().then((value) {
+    _homeService.getdataTemperature(regionUrl.string).then((value) {
       dataTemperatureList.value = value;
     }).catchError((dynamic error) {
       this.error.trigger(error);
@@ -76,8 +76,7 @@ class HomeController extends GetxController {
 
   void _callingGetDataDate() {
     isLoading.call(true);
-
-    _homeService.getdataDate().then((value) {
+    _homeService.getdataDate(regionUrl.string).then((value) {
       dataDateList.value = value;
     }).catchError((dynamic error) {
       this.error.trigger(error);

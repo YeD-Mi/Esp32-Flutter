@@ -1,5 +1,6 @@
+import 'package:esp32proje/views/admin/admin_page.dart';
+import 'package:esp32proje/views/common/common_values.dart';
 import 'package:esp32proje/views/users/users_page.dart';
-import 'package:esp32proje/views/profile/profile_page.dart';
 import 'package:esp32proje/data/src/colors.dart';
 import 'package:esp32proje/data/src/images.dart';
 import 'package:esp32proje/data/src/string.dart';
@@ -18,11 +19,24 @@ class HomePage extends GetWidget<HomeController> {
     controller.error.listen((error) => _errorDialog());
     return Scaffold(
         appBar: AppBar(
-          title: Center(child: Text(homeappbar)),
+          title: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Center(child: Text(homeappbar)),
+              InkWell(
+                  onTap: () {
+                    controller.onInit();
+                  },
+                  child: Icon(Icons.refresh))
+            ],
+          ),
           backgroundColor: primaryColor,
         ),
-        drawer: _buildDrawer(),
-        body: _deneme());
+        drawer: loginregion == 'Genel' //Değer 0 ise ResultPage açılır.
+            ? _adminDrawer()
+            : _buildDrawer(),
+        body: _buildBody());
   }
 
   void _errorDialog() {
@@ -38,103 +52,104 @@ class HomePage extends GetWidget<HomeController> {
   }
 
   Widget _buildBody() {
-    return ListView.builder(
-        itemBuilder: (_, index) => Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(5.0),
-                  child: _buildCard(
-                      controller.dataIdList.value?[index] ?? "",
-                      controller.dataCurrentList.value?[index] ?? "",
-                      controller.dataVoltageList.value?[index] ?? "",
-                      controller.dataTemperatureList.value?[index] ?? "",
-                      controller.dataDateList.value?[index].toString() ?? ""),
-                ),
-              ),
-            ),
-        itemCount: 4
-        //controller.dataDateList.value?.length ?? 0,
-        );
-  }
-
-  Widget _deneme() {
     return Padding(
-      padding: const EdgeInsets.all(16),
-      child: DataTable2(
-          columnSpacing: 5,
-          horizontalMargin: 2,
-          minWidth: Get.width * 0.9,
-          columns: [
-            DataColumn2(
-              label: Text('ID'),
-            ),
-            DataColumn2(
-              label: Text('Amper'),
-            ),
-            DataColumn(
-              label: Text('Volt'),
-            ),
-            DataColumn(
-              label: Text('Sıcaklık'),
-            ),
-            DataColumn2(
-              label: Text('Tarih'),
-            ),
-          ],
-          rows: List<DataRow>.generate(
-              controller.dataIdList.value!.length,
-              (index) => DataRow(cells: [
-                    DataCell(Text(controller.dataIdList.value?[index])),
-                    DataCell(Text(controller.dataCurrentList.value?[index])),
-                    DataCell(Text(controller.dataVoltageList.value?[index])),
-                    DataCell(
-                        Text(controller.dataTemperatureList.value?[index])),
-                    DataCell(
-                        Text(controller.dataDateList.value![index].toString()))
-                  ]))),
-    );
-  }
-
-  Widget _buildCard(
-    String id,
-    String amper,
-    String volt,
-    String sicaklik,
-    String date,
-  ) {
-    return Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Text(
-                  "ID: $id",
+        padding: const EdgeInsets.all(16),
+        child: Obx(
+          () => DataTable2(
+              columnSpacing: 5,
+              horizontalMargin: 2,
+              minWidth: Get.width * 0.9,
+              columns: [
+                DataColumn2(
+                  label: Text('ID'),
                 ),
-                Divider(),
-                Text(
-                  "Akım: $amper",
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                DataColumn2(
+                  label: Text('Amper'),
                 ),
-                Divider(),
-                Text(
-                  "Volt: $volt",
+                DataColumn(
+                  label: Text('Volt'),
                 ),
-                Divider(),
-                Text(
-                  "Derece: $sicaklik",
+                DataColumn(
+                  label: Text('Sıcaklık'),
+                ),
+                DataColumn2(
+                  label: Text('Tarih'),
                 ),
               ],
-            ),
-            Divider(),
-            Text(
-              "Kayit Tarihi: $date",
-            ),
-          ],
+              rows: List<DataRow>.generate(
+                  controller.dataDateList.value?.length ?? 0,
+                  (index) => DataRow(cells: [
+                        DataCell(
+                            Text(controller.dataIdList.value?[index] ?? "")),
+                        DataCell(Text(
+                            controller.dataCurrentList.value?[index] ?? "")),
+                        DataCell(Text(
+                            controller.dataVoltageList.value?[index] ?? "")),
+                        DataCell(Text(
+                            controller.dataTemperatureList.value?[index] ??
+                                "")),
+                        DataCell(Text(
+                            controller.dataDateList.value?[index].toString() ??
+                                ""))
+                      ]))),
         ));
+  }
+
+  Widget _adminDrawer() {
+    return Drawer(
+      backgroundColor: primaryColor,
+      child: ListView(
+        children: [
+          UserAccountsDrawerHeader(
+              decoration: BoxDecoration(color: floor),
+              currentAccountPicture:
+                  CircleAvatar(backgroundImage: AssetImage(defaultimage)),
+              accountName: Text(
+                welcometxt + loginuser(),
+                style: TextStyle(color: primaryColor),
+              ),
+              accountEmail:
+                  Text(loginregion(), style: TextStyle(color: primaryColor))),
+          ListTile(
+            title: Text(abouttxt, style: TextStyle(fontSize: 16, color: floor)),
+            leading: Icon(Icons.info_rounded),
+            iconColor: floor,
+            subtitle: Text(aboutcomment,
+                style: TextStyle(fontSize: 13, color: floor)),
+          ),
+          Divider(),
+          ListTile(
+              title: Text(
+                adminbartxt,
+                style: TextStyle(fontSize: 16, color: floor),
+              ),
+              //Sonuna icon eklemek istersek leading yerine; trailing kullanılır.
+              leading: Icon(Icons.account_balance_rounded),
+              iconColor: floor,
+              onTap: () => Get.toNamed(AdminPage.routeName)),
+          Divider(),
+          ListTile(
+              title: Text(
+                alluserstxt,
+                style: TextStyle(fontSize: 16, color: floor),
+              ),
+              //Sonuna icon eklemek istersek leading yerine; trailing kullanılır.
+              leading: Icon(Icons.person),
+              iconColor: floor,
+              onTap: () => Get.toNamed(UsersPage.routeName)),
+          Divider(),
+          ListTile(
+              title: Text(
+                exittxt,
+                style: TextStyle(fontSize: 16, color: floor),
+              ),
+              //Sonuna icon eklemek istersek leading yerine; trailing kullanılır.
+              leading: Icon(Icons.logout_outlined),
+              iconColor: floor,
+              onTap: () => Get.offNamed(LoginPage.routeName))
+        ],
+      ),
+    );
   }
 
   Widget _buildDrawer() {
@@ -147,11 +162,11 @@ class HomePage extends GetWidget<HomeController> {
               currentAccountPicture:
                   CircleAvatar(backgroundImage: AssetImage(defaultimage)),
               accountName: Text(
-                "Kullanıcı Adı",
+                welcometxt + loginuser(),
                 style: TextStyle(color: primaryColor),
               ),
-              accountEmail: Text("Kullanıcı Maili",
-                  style: TextStyle(color: primaryColor))),
+              accountEmail:
+                  Text(loginregion(), style: TextStyle(color: primaryColor))),
           ListTile(
             title: Text(abouttxt, style: TextStyle(fontSize: 16, color: floor)),
             leading: Icon(Icons.info_rounded),
@@ -159,26 +174,6 @@ class HomePage extends GetWidget<HomeController> {
             subtitle: Text(aboutcomment,
                 style: TextStyle(fontSize: 13, color: floor)),
           ),
-          Divider(),
-          ListTile(
-              title: Text(
-                profiltxt,
-                style: TextStyle(fontSize: 16, color: floor),
-              ),
-              //Sonuna icon eklemek istersek leading yerine; trailing kullanılır.
-              leading: Icon(Icons.edit_note_outlined),
-              iconColor: floor,
-              onTap: () => Get.toNamed(ProfilePage.routeName)),
-          Divider(),
-          ListTile(
-              title: Text(
-                alluserstxt,
-                style: TextStyle(fontSize: 16, color: floor),
-              ),
-              //Sonuna icon eklemek istersek leading yerine; trailing kullanılır.
-              leading: Icon(Icons.settings_applications_rounded),
-              iconColor: floor,
-              onTap: () => Get.toNamed(UsersPage.routeName)),
           Divider(),
           ListTile(
               title: Text(

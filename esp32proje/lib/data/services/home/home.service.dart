@@ -3,17 +3,17 @@ import 'package:esp32proje/data/src/string.dart';
 import 'package:http/http.dart' as http;
 
 abstract class HomeService {
-  Future getdataid();
-  Future getdataCurrent();
-  Future getdataVoltage();
-  Future getdataTemperature();
-  Future getdataDate();
+  Future getdataid(String deneUrl);
+  Future getdataCurrent(String deneUrl);
+  Future getdataVoltage(String deneUrl);
+  Future getdataTemperature(String deneUrl);
+  Future getdataDate(String deneUrl);
 }
 
 class HomeServiceImp extends HomeService {
   @override
-  Future getdataid() async {
-    final response = await http.get(Uri.parse(espUrl));
+  Future getdataid(String deneUrl) async {
+    final response = await http.get(Uri.parse(deneUrl));
     var dataIdList = [];
     if (response.statusCode == 200) {
       var data = homeResponseModelFromJson(response.body);
@@ -26,8 +26,8 @@ class HomeServiceImp extends HomeService {
     }
   }
 
-  Future getdataCurrent() async {
-    final response = await http.get(Uri.parse(espUrl));
+  Future getdataCurrent(String deneUrl) async {
+    final response = await http.get(Uri.parse(deneUrl));
 
     var dataCurrentList = [];
 
@@ -42,8 +42,8 @@ class HomeServiceImp extends HomeService {
     }
   }
 
-  Future getdataVoltage() async {
-    final response = await http.get(Uri.parse(espUrl));
+  Future getdataVoltage(String deneUrl) async {
+    final response = await http.get(Uri.parse(deneUrl));
 
     var dataVoltageList = [];
 
@@ -58,8 +58,8 @@ class HomeServiceImp extends HomeService {
     }
   }
 
-  Future getdataTemperature() async {
-    final response = await http.get(Uri.parse(espUrl));
+  Future getdataTemperature(String deneUrl) async {
+    final response = await http.get(Uri.parse(deneUrl));
 
     var dataTemperatureList = [];
 
@@ -74,8 +74,8 @@ class HomeServiceImp extends HomeService {
     }
   }
 
-  Future getdataDate() async {
-    final response = await http.get(Uri.parse(espUrl));
+  Future getdataDate(String deneUrl) async {
+    final response = await http.get(Uri.parse(deneUrl));
 
     var dataDateList = [];
 
