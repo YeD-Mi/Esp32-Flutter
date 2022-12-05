@@ -12,8 +12,8 @@ abstract class HomeService {
 
 class HomeServiceImp extends HomeService {
   @override
-  Future getdataid(String deneUrl) async {
-    final response = await http.get(Uri.parse(deneUrl));
+  Future getdataid(String Url) async {
+    final response = await http.get(Uri.parse(Url));
     var dataIdList = [];
     if (response.statusCode == 200) {
       var data = homeResponseModelFromJson(response.body);
@@ -26,8 +26,8 @@ class HomeServiceImp extends HomeService {
     }
   }
 
-  Future getdataCurrent(String deneUrl) async {
-    final response = await http.get(Uri.parse(deneUrl));
+  Future getdataCurrent(String Url) async {
+    final response = await http.get(Uri.parse(Url));
 
     var dataCurrentList = [];
 
@@ -42,8 +42,8 @@ class HomeServiceImp extends HomeService {
     }
   }
 
-  Future getdataVoltage(String deneUrl) async {
-    final response = await http.get(Uri.parse(deneUrl));
+  Future getdataVoltage(String Url) async {
+    final response = await http.get(Uri.parse(Url));
 
     var dataVoltageList = [];
 
@@ -58,8 +58,8 @@ class HomeServiceImp extends HomeService {
     }
   }
 
-  Future getdataTemperature(String deneUrl) async {
-    final response = await http.get(Uri.parse(deneUrl));
+  Future getdataTemperature(String Url) async {
+    final response = await http.get(Uri.parse(Url));
 
     var dataTemperatureList = [];
 
@@ -74,8 +74,8 @@ class HomeServiceImp extends HomeService {
     }
   }
 
-  Future getdataDate(String deneUrl) async {
-    final response = await http.get(Uri.parse(deneUrl));
+  Future getdataDate(String Url) async {
+    final response = await http.get(Uri.parse(Url));
 
     var dataDateList = [];
 

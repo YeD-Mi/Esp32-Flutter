@@ -1,7 +1,9 @@
+import 'package:esp32proje/data/services/home/home.service.dart';
 import 'package:esp32proje/data/src/colors.dart';
 import 'package:esp32proje/data/src/images.dart';
 import 'package:esp32proje/data/src/string.dart';
 import 'package:esp32proje/views/common/common_values.dart';
+import 'package:esp32proje/views/home/home_controller.dart';
 import 'package:esp32proje/views/home/home_page.dart';
 import 'package:esp32proje/views/login/login_page.dart';
 import 'package:esp32proje/views/profil/profil_controller.dart';
@@ -70,7 +72,10 @@ class ProfilPage extends GetWidget<ProfilController> {
               ),
               leading: Icon(Icons.home),
               iconColor: floor,
-              onTap: () => Get.offAllNamed(HomePage.routeName)),
+              onTap: () {
+                Get.lazyPut<HomeService>(() => HomeServiceImp());
+                Get.offAllNamed(HomePage.routeName);
+              }),
           Divider(),
           ListTile(
               title: Text(

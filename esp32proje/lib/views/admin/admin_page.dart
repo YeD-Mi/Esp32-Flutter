@@ -1,3 +1,4 @@
+import 'package:esp32proje/data/services/home/home.service.dart';
 import 'package:esp32proje/data/src/colors.dart';
 import 'package:esp32proje/data/src/images.dart';
 import 'package:esp32proje/data/src/string.dart';
@@ -41,6 +42,7 @@ class AdminPage extends GetWidget<AdminController> {
                   InkWell(
                     onTap: () {
                       regionUrl.call('http://sub.mryed.com/get_ege.php');
+                      Get.lazyPut<HomeService>(() => HomeServiceImp());
                       Get.offAllNamed(HomePage.routeName);
                     },
                     child: Container(
@@ -82,6 +84,7 @@ class AdminPage extends GetWidget<AdminController> {
                   InkWell(
                     onTap: () {
                       regionUrl.call('http://sub.mryed.com/get_marmara.php');
+                      Get.lazyPut<HomeService>(() => HomeServiceImp());
                       Get.toNamed(HomePage.routeName);
                     },
                     child: Container(
@@ -127,6 +130,7 @@ class AdminPage extends GetWidget<AdminController> {
                   InkWell(
                     onTap: () {
                       regionUrl.call('http://sub.mryed.com/get_akdeniz.php');
+                      Get.lazyPut<HomeService>(() => HomeServiceImp());
                       Get.toNamed(HomePage.routeName);
                     },
                     child: Container(
@@ -168,6 +172,7 @@ class AdminPage extends GetWidget<AdminController> {
                   InkWell(
                     onTap: () {
                       regionUrl.call('http://sub.mryed.com/get_karadeniz.php');
+                      Get.lazyPut<HomeService>(() => HomeServiceImp());
                       Get.toNamed(HomePage.routeName);
                     },
                     child: Container(
@@ -213,6 +218,7 @@ class AdminPage extends GetWidget<AdminController> {
                   InkWell(
                     onTap: () {
                       regionUrl.call('http://sub.mryed.com/get_dogu.php');
+                      Get.lazyPut<HomeService>(() => HomeServiceImp());
                       Get.toNamed(HomePage.routeName);
                     },
                     child: Container(
@@ -254,6 +260,7 @@ class AdminPage extends GetWidget<AdminController> {
                   InkWell(
                     onTap: () {
                       regionUrl.call('http://sub.mryed.com/get_guneydogu.php');
+                      Get.lazyPut<HomeService>(() => HomeServiceImp());
                       Get.toNamed(HomePage.routeName);
                     },
                     child: Container(
@@ -299,6 +306,7 @@ class AdminPage extends GetWidget<AdminController> {
                   InkWell(
                     onTap: () {
                       regionUrl.call('http://sub.mryed.com/get_icanadolu.php');
+                      Get.lazyPut<HomeService>(() => HomeServiceImp());
                       Get.toNamed(HomePage.routeName);
                     },
                     child: Container(

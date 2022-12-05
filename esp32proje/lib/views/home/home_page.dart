@@ -1,3 +1,4 @@
+import 'package:esp32proje/data/services/users/user_service.dart';
 import 'package:esp32proje/views/admin/admin_page.dart';
 import 'package:esp32proje/views/common/common_values.dart';
 import 'package:esp32proje/views/profil/profil_page.dart';
@@ -104,10 +105,10 @@ class HomePage extends GetWidget<HomeController> {
               currentAccountPicture:
                   CircleAvatar(backgroundImage: AssetImage(defaultimage)),
               accountName: Text(
-                welcometxt + loginuser.obs.string,
+                welcometxt + loginuser.string,
                 style: TextStyle(color: primaryColor),
               ),
-              accountEmail: Text(loginregion.obs.string,
+              accountEmail: Text(loginregion.string,
                   style: TextStyle(color: primaryColor))),
           ListTile(
             title: Text(abouttxt, style: TextStyle(fontSize: 16, color: floor)),
@@ -133,7 +134,10 @@ class HomePage extends GetWidget<HomeController> {
               ),
               leading: Icon(Icons.person),
               iconColor: floor,
-              onTap: () => Get.offAllNamed(UsersPage.routeName)),
+              onTap: () {
+                Get.lazyPut<UserService>(() => UserServiceImp());
+                Get.offAllNamed(UsersPage.routeName);
+              }),
           Divider(),
           ListTile(
               title: Text(
@@ -158,10 +162,10 @@ class HomePage extends GetWidget<HomeController> {
               currentAccountPicture:
                   CircleAvatar(backgroundImage: AssetImage(defaultimage)),
               accountName: Text(
-                welcometxt + loginuser.obs.string,
+                welcometxt + loginuser.string,
                 style: TextStyle(color: primaryColor),
               ),
-              accountEmail: Text(loginregion.obs.string,
+              accountEmail: Text(loginregion.string,
                   style: TextStyle(color: primaryColor))),
           ListTile(
             title: Text(abouttxt, style: TextStyle(fontSize: 16, color: floor)),
@@ -178,7 +182,10 @@ class HomePage extends GetWidget<HomeController> {
               ),
               leading: Icon(Icons.person_pin_rounded),
               iconColor: floor,
-              onTap: () => Get.offAllNamed(ProfilPage.routeName)),
+              onTap: () {
+                Get.lazyPut<UserService>(() => UserServiceImp());
+                Get.offAllNamed(ProfilPage.routeName);
+              }),
           Divider(),
           ListTile(
               title: Text(
