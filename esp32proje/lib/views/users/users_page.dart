@@ -1,7 +1,10 @@
-import 'package:esp32proje/data/services/users/user_service.dart';
 import 'package:esp32proje/data/src/colors.dart';
+import 'package:esp32proje/data/src/images.dart';
 import 'package:esp32proje/data/src/string.dart';
+import 'package:esp32proje/views/admin/admin_page.dart';
+import 'package:esp32proje/views/common/common_values.dart';
 import 'package:esp32proje/views/home/home_page.dart';
+import 'package:esp32proje/views/login/login_page.dart';
 import 'package:esp32proje/views/users/users_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -46,6 +49,7 @@ class UsersPage extends GetWidget<UsersController> {
               ),
             ],
           )),
+      drawer: _buildDrawer(),
       body: _buildBody(),
     );
   }
@@ -62,6 +66,63 @@ class UsersPage extends GetWidget<UsersController> {
         ));
   }
 
+  Widget _buildDrawer() {
+    return Drawer(
+      backgroundColor: primaryColor,
+      child: ListView(
+        children: [
+          UserAccountsDrawerHeader(
+              decoration: BoxDecoration(color: floor),
+              currentAccountPicture:
+                  CircleAvatar(backgroundImage: AssetImage(defaultimage)),
+              accountName: Text(
+                welcometxt + loginuser(),
+                style: TextStyle(color: primaryColor),
+              ),
+              accountEmail:
+                  Text(loginregion(), style: TextStyle(color: primaryColor))),
+          ListTile(
+            title: Text(abouttxt, style: TextStyle(fontSize: 16, color: floor)),
+            leading: Icon(Icons.info_rounded),
+            iconColor: floor,
+            subtitle: Text(aboutcomment,
+                style: TextStyle(fontSize: 13, color: floor)),
+          ),
+          Divider(),
+          ListTile(
+              title: Text(
+                adminbartxt,
+                style: TextStyle(fontSize: 16, color: floor),
+              ),
+              //Sonuna icon eklemek istersek leading yerine; trailing kullanılır.
+              leading: Icon(Icons.account_balance_rounded),
+              iconColor: floor,
+              onTap: () => Get.toNamed(AdminPage.routeName)),
+          Divider(),
+          ListTile(
+              title: Text(
+                alluserstxt,
+                style: TextStyle(fontSize: 16, color: floor),
+              ),
+              //Sonuna icon eklemek istersek leading yerine; trailing kullanılır.
+              leading: Icon(Icons.person),
+              iconColor: floor,
+              onTap: () => Get.toNamed(UsersPage.routeName)),
+          Divider(),
+          ListTile(
+              title: Text(
+                exittxt,
+                style: TextStyle(fontSize: 16, color: floor),
+              ),
+              //Sonuna icon eklemek istersek leading yerine; trailing kullanılır.
+              leading: Icon(Icons.logout_outlined),
+              iconColor: floor,
+              onTap: () => Get.offAllNamed(LoginPage.routeName))
+        ],
+      ),
+    );
+  }
+
   Widget _buildBody() {
     return Obx(() => ListView.builder(
           itemBuilder: (_, index) => Padding(
@@ -75,14 +136,14 @@ class UsersPage extends GetWidget<UsersController> {
                   controller.userMailList.value?[index] ?? "",
                   controller.userRegisterDate.value?[index].toString() ?? "",
                   controller.userParolaList.value?[index] ?? "",
-                  controller.userRegion.value?[index] ?? "",
-                  controller.userAdmin.value?[index] ?? "",
-                  controller.userRemove.value?[index] ?? "",
+                  controller.userRegionList.value?[index] ?? "",
+                  controller.userAdminList.value?[index] ?? "",
+                  controller.userRemoveList.value?[index] ?? "",
                 ),
               ),
             ),
           ),
-          itemCount: controller.userMailList.value?.length ?? 1,
+          itemCount: controller.userIdList.value?.length ?? 1,
         ));
   }
 
@@ -99,7 +160,7 @@ class UsersPage extends GetWidget<UsersController> {
     return Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text(
               "Uye No: $userid",
@@ -135,166 +196,169 @@ class UsersPage extends GetWidget<UsersController> {
               children: [
                 ElevatedButton(
                     onPressed: () {
-                      showDialog(userid, username, email, parola, admin);
+                      if (admin.toString() == 0) {
+                        admin = '1';
+                      } else {
+                        admin = '0';
+                      }
+                      controller.callingUpdateService(
+                          userid, username, email, admin, parola, isremove);
+                      controller.onInit();
+                      Get.toNamed(UsersPage.routeName);
                     },
                     style: ElevatedButton.styleFrom(
                       primary: primaryColor,
                     ),
-                    child: Text(edittxt)),
+                    child: Text(statustxt)),
                 ElevatedButton(
                     onPressed: () {
-                      Get.toNamed(HomePage.routeName);
+                      if (isremove.toString() == '0') {
+                        isremove = '1';
+                      } else {
+                        isremove = '0';
+                      }
+                      controller.callingUpdateService(
+                          userid, username, email, admin, parola, isremove);
+                      controller.onInit();
+                      Get.toNamed(UsersPage.routeName);
                     },
                     style: ElevatedButton.styleFrom(
                       primary: primaryColor,
                     ),
-                    child: Text(deletetxt)),
+                    child: Text(durumtxt)),
               ],
             ),
+            ElevatedButton(
+                onPressed: () {
+                  showEditDialog(
+                      userid, username, email, parola, admin, isremove);
+                },
+                style: ElevatedButton.styleFrom(
+                  primary: primaryColor,
+                ),
+                child: Text(edittxt)),
           ],
         ));
   }
 
-  void showDialog(
-    String userid,
-    String username,
-    String email,
-    String parola,
-    String admin,
-  ) {
+  void showEditDialog(String userid, String username, String email,
+      String parola, String admin, String isremove) {
     Get.defaultDialog(
       backgroundColor: primaryColor,
-      title: "Uye Duzenle",
+      title: "Uye Duzenle / ID: $userid",
       titleStyle: TextStyle(color: borderColor),
-      content: SingleChildScrollView(
-        child: Column(
-          children: [
-            Text(
-              "Kullanici ID: $userid",
-              style: TextStyle(color: floor),
-            ),
-            SizedBox(height: Get.height * 0.02),
-            Text("Kullanici Adi:", style: TextStyle(color: floor)),
-            Container(
-              decoration: BoxDecoration(
-                  border: Border.all(color: borderColor),
-                  borderRadius: BorderRadius.circular(15)),
-              child: Padding(
-                padding: EdgeInsets.only(left: Get.width * 0.05),
-                child: TextField(
-                  cursorColor: floor,
-                  onChanged: (value) {
-                    //username = value;
-                  },
-                  textInputAction: TextInputAction.next,
-                  decoration: InputDecoration(
-                    border: InputBorder.none,
-                    hintText: username,
-                    hintStyle: TextStyle(color: floor),
-                  ),
+      content: Column(
+        children: [
+          Text("Kullanici Adi:", style: TextStyle(color: floor)),
+          Container(
+            decoration: BoxDecoration(
+                border: Border.all(color: borderColor),
+                borderRadius: BorderRadius.circular(15)),
+            child: Padding(
+              padding: EdgeInsets.only(left: Get.width * 0.05),
+              child: TextField(
+                cursorColor: floor,
+                onChanged: (value) {
+                  controller.newusername.call(value);
+                },
+                textInputAction: TextInputAction.next,
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  hintText: username,
+                  hintStyle: TextStyle(color: floor),
                 ),
               ),
             ),
-            SizedBox(height: Get.height * 0.02),
-            Text(
-              "Kullanici Eposta:",
-              style: TextStyle(color: floor),
-            ),
-            Container(
-              decoration: BoxDecoration(
-                  border: Border.all(color: borderColor),
-                  borderRadius: BorderRadius.circular(15)),
-              child: Padding(
-                padding: EdgeInsets.only(left: Get.width * 0.05),
-                child: TextField(
-                  onChanged: (value) {
-                    //username = value;
-                  },
-                  textInputAction: TextInputAction.next,
-                  decoration: InputDecoration(
-                    border: InputBorder.none,
-                    hintText: email,
-                    hintStyle: TextStyle(color: floor),
-                  ),
+          ),
+          SizedBox(height: Get.height * 0.02),
+          Text(
+            "Kullanici Eposta:",
+            style: TextStyle(color: floor),
+          ),
+          Container(
+            decoration: BoxDecoration(
+                border: Border.all(color: borderColor),
+                borderRadius: BorderRadius.circular(15)),
+            child: Padding(
+              padding: EdgeInsets.only(left: Get.width * 0.05),
+              child: TextField(
+                onChanged: (eposta) {
+                  controller.newemail.call(eposta);
+                },
+                textInputAction: TextInputAction.next,
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  hintText: email,
+                  hintStyle: TextStyle(color: floor),
                 ),
               ),
             ),
-            SizedBox(height: Get.height * 0.02),
-            Text(
-              "Kullanici Parolasi:",
-              style: TextStyle(color: floor),
-            ),
-            Container(
-              decoration: BoxDecoration(
-                  border: Border.all(color: borderColor),
-                  borderRadius: BorderRadius.circular(15)),
-              child: Padding(
-                padding: EdgeInsets.only(left: Get.width * 0.05),
-                child: TextField(
-                  onChanged: (value) {
-                    //username = value;
-                  },
-                  textInputAction: TextInputAction.next,
-                  decoration: InputDecoration(
-                    border: InputBorder.none,
-                    hintText: parola,
-                    hintStyle: TextStyle(color: floor),
-                  ),
+          ),
+          SizedBox(height: Get.height * 0.02),
+          Text(
+            "Kullanici Parolasi:",
+            style: TextStyle(color: floor),
+          ),
+          Container(
+            decoration: BoxDecoration(
+                border: Border.all(color: borderColor),
+                borderRadius: BorderRadius.circular(15)),
+            child: Padding(
+              padding: EdgeInsets.only(left: Get.width * 0.05),
+              child: TextField(
+                onChanged: (sifre) {
+                  controller.newparola.call(sifre);
+                },
+                textInputAction: TextInputAction.next,
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  hintText: parola,
+                  hintStyle: TextStyle(color: floor),
                 ),
               ),
             ),
-            SizedBox(height: Get.height * 0.02),
-            Text(
-              "Kullanici Yetkisi:",
-              style: TextStyle(color: floor),
-            ),
-            Text(
-              "Admin: 1 Standart Kullanici: 0",
-              style: TextStyle(fontSize: 11),
-            ),
-            Container(
-              decoration: BoxDecoration(
-                  border: Border.all(color: borderColor),
-                  borderRadius: BorderRadius.circular(15)),
-              child: Padding(
-                padding: EdgeInsets.only(left: Get.width * 0.05),
-                child: TextField(
-                  onChanged: (value) {
-                    //username = value;
+          ),
+          SizedBox(height: Get.height * 0.02),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              ElevatedButton(
+                  onPressed: () {
+                    controller.onInit();
+                    Get.back();
                   },
-                  textInputAction: TextInputAction.next,
-                  decoration: InputDecoration(
-                    border: InputBorder.none,
-                    hintText: admin,
-                    hintStyle: TextStyle(color: floor),
+                  style: ElevatedButton.styleFrom(
+                    primary: borderColor,
                   ),
-                ),
-              ),
-            ),
-            SizedBox(height: Get.height * 0.02),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                ElevatedButton(
-                    onPressed: () {
-                      Get.back();
-                    },
-                    style: ElevatedButton.styleFrom(
-                      primary: borderColor,
-                    ),
-                    child: Text('Kapat')),
-                ElevatedButton(
-                    onPressed: () {
-                      Get.toNamed(HomePage.routeName);
-                    },
-                    style: ElevatedButton.styleFrom(
-                      primary: borderColor,
-                    ),
-                    child: Text('Kaydet')),
-              ],
-            ),
-          ],
-        ),
+                  child: Text('Kapat')),
+              ElevatedButton(
+                  onPressed: () {
+                    if (controller.newusername.string.isEmpty) {
+                      controller.newusername.value = username;
+                    }
+                    if (controller.newemail.string.isEmpty) {
+                      controller.newemail.value = email;
+                    }
+                    if (controller.newparola.string.isEmpty) {
+                      controller.newparola.value = parola;
+                    }
+                    controller.callingUpdateService(
+                        userid,
+                        controller.newusername.obs.string,
+                        controller.newemail.obs.string,
+                        admin,
+                        controller.newparola.obs.string,
+                        isremove);
+                    controller.onInit();
+                    Get.toNamed(UsersPage.routeName);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    primary: borderColor,
+                  ),
+                  child: Text('Kaydet')),
+            ],
+          ),
+        ],
       ),
     );
   }

@@ -4,6 +4,10 @@ import 'package:esp32proje/data/services/register/register_service.dart';
 import 'package:get/state_manager.dart';
 
 class RegisterController extends GetxController {
+  final Rx<bool> isLoading = RxBool(false);
+  final Rxn<RegisterResponseModel> user = Rxn();
+  final RegisterService _registerService;
+  RegisterController(this._registerService);
   void callingRegisterService(
       String username, String email, String region, String parola) {
     final RegisterRequestModel _userReguest = RegisterRequestModel(
@@ -13,9 +17,10 @@ class RegisterController extends GetxController {
       parola: parola,
     );
     isLoading.call(true);
-    _registerService.register(_userReguest).then((user) {
-      print("Basarili");
-    }).catchError((dynamic error) {
+    _registerService
+        .register(_userReguest)
+        .then((user) {})
+        .catchError((dynamic error) {
       print(error);
     }).whenComplete(() {
       isLoading.call(false);
@@ -31,9 +36,4 @@ class RegisterController extends GetxController {
     'Marmara',
     'Ic Anadolu',
   ];
-
-  final Rx<bool> isLoading = RxBool(false);
-  final Rxn<RegisterResponseModel> user = Rxn();
-  final RegisterService _registerService;
-  RegisterController(this._registerService);
 }

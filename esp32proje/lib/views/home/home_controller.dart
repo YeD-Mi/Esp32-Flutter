@@ -2,7 +2,6 @@ import 'package:esp32proje/data/src/string.dart';
 import 'package:get/get.dart';
 import '../../data/services/home/home.service.dart';
 import 'package:get/state_manager.dart';
-import 'package:esp32proje/data/src/string.dart';
 
 class HomeController extends GetxController {
   final Rx<bool> isLoading = RxBool(false);
@@ -28,7 +27,7 @@ class HomeController extends GetxController {
 
   void _callingGetDataID() {
     isLoading.call(true);
-    _homeService.getdataid(regionUrl.string).then((value) {
+    _homeService.getdataid(regionUrl.obs.string).then((value) {
       dataIdList.value = value;
     }).catchError((dynamic error) {
       this.error.trigger(error);
@@ -40,7 +39,7 @@ class HomeController extends GetxController {
 
   void _callingGetDataCurrent() {
     isLoading.call(true);
-    _homeService.getdataCurrent(regionUrl.string).then((value) {
+    _homeService.getdataCurrent(regionUrl.obs.string).then((value) {
       dataCurrentList.value = value;
     }).catchError((dynamic error) {
       this.error.trigger(error);
@@ -52,7 +51,7 @@ class HomeController extends GetxController {
 
   void _callingGetDataVoltage() {
     isLoading.call(true);
-    _homeService.getdataVoltage(regionUrl.string).then((value) {
+    _homeService.getdataVoltage(regionUrl.obs.string).then((value) {
       dataVoltageList.value = value;
     }).catchError((dynamic error) {
       this.error.trigger(error);
@@ -64,7 +63,7 @@ class HomeController extends GetxController {
 
   void _callingGetDataTemperature() {
     isLoading.call(true);
-    _homeService.getdataTemperature(regionUrl.string).then((value) {
+    _homeService.getdataTemperature(regionUrl.obs.string).then((value) {
       dataTemperatureList.value = value;
     }).catchError((dynamic error) {
       this.error.trigger(error);
@@ -76,7 +75,7 @@ class HomeController extends GetxController {
 
   void _callingGetDataDate() {
     isLoading.call(true);
-    _homeService.getdataDate(regionUrl.string).then((value) {
+    _homeService.getdataDate(regionUrl.obs.string).then((value) {
       dataDateList.value = value;
     }).catchError((dynamic error) {
       this.error.trigger(error);

@@ -29,40 +29,43 @@ class LoginController extends GetxController {
     _loginService.login(requestModel).then((user) {
       if (user.statu == 2) {
         isLogin.call(true);
-        loginuser.value = user.username;
-        loginregion.value = user.region;
-        print(user.region);
-        switch (user.region) {
+        loginuserid.call(user.userId);
+        loginuser.call(user.username);
+        loginregion.call(user.region);
+        loginmail.call(user.email);
+        loginparola.call(user.parola);
+        loginisadmin.call(user.admin);
+        switch (loginregion.obs.string) {
           case 'Genel':
-            Get.toNamed(AdminPage.routeName);
+            Get.offAllNamed(AdminPage.routeName);
             break;
           case 'Ege':
-            regionUrl.call('http://sub.mryed.com/esp32/get_ege.php');
-            Get.toNamed(HomePage.routeName);
+            regionUrl.call('http://sub.mryed.com/get_ege.php');
+            Get.offAllNamed(HomePage.routeName);
             break;
           case 'Marmara':
-            regionUrl.call('http://sub.mryed.com/esp32/get_marmara.php');
-            Get.toNamed(HomePage.routeName);
+            regionUrl.call('http://sub.mryed.com/get_marmara.php');
+            Get.offAllNamed(HomePage.routeName);
             break;
           case 'Karadeniz':
-            regionUrl.call('http://sub.mryed.com/esp32/get_karadeniz.php');
+            regionUrl.call('http://sub.mryed.com/get_karadeniz.php');
             Get.toNamed(HomePage.routeName);
             break;
           case 'Dogu':
-            regionUrl.call('http://sub.mryed.com/esp32/get_dogu.php');
-            Get.toNamed(HomePage.routeName);
+            regionUrl.call('http://sub.mryed.com/get_dogu.php');
+            Get.offAllNamed(HomePage.routeName);
             break;
           case 'Akdeniz':
-            regionUrl.call('http://sub.mryed.com/esp32/get_akdeniz.php');
-            Get.toNamed(HomePage.routeName);
+            regionUrl.call('http://sub.mryed.com/get_akdeniz.php');
+            Get.offAllNamed(HomePage.routeName);
             break;
           case 'Guney Dogu':
-            regionUrl.call('http://sub.mryed.com/esp32/get_guneydogu.php');
-            Get.toNamed(HomePage.routeName);
+            regionUrl.call('http://sub.mryed.com/get_guneydogu.php');
+            Get.offAllNamed(HomePage.routeName);
             break;
           case 'Ic Anadolu':
-            regionUrl.call('http://sub.mryed.com/esp32/get_icanadolu.php');
-            Get.toNamed(HomePage.routeName);
+            regionUrl.call('http://sub.mryed.com/get_icanadolu.php');
+            Get.offAllNamed(HomePage.routeName);
             break;
         }
       }

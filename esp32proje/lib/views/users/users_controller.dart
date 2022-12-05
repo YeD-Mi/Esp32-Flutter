@@ -1,6 +1,5 @@
-import 'package:esp32proje/data/services/users/model/users_response.dart';
+import 'package:esp32proje/data/services/users/model/update_request.dart';
 import 'package:esp32proje/data/services/users/user_service.dart';
-import 'package:flutter/material.dart';
 import 'package:get/state_manager.dart';
 
 class UsersController extends GetxController {
@@ -12,12 +11,15 @@ class UsersController extends GetxController {
   final Rxn<List> userRegisterDate = Rxn();
   final Rxn<List> userParolaList = Rxn();
   final Rxn<List> userIdList = Rxn();
-  final Rxn<List> userRegion = Rxn();
-  final Rxn<List> userAdmin = Rxn();
-  final Rxn<List> userRemove = Rxn();
+  final Rxn<List> userRegionList = Rxn();
+  final Rxn<List> userAdminList = Rxn();
+  final Rxn<List> userRemoveList = Rxn();
 
+  final RxnString newusername = RxnString();
+  final RxnString newemail = RxnString();
+  final RxnString newparola = RxnString();
+  final RxnString newadmin = RxnString();
   final UserService _userService;
-
   UsersController(this._userService);
 
   @override
@@ -59,7 +61,6 @@ class UsersController extends GetxController {
 
   void _callingGetDate() {
     isLoading.call(true);
-
     _userService.getDate().then((value) {
       userRegisterDate.value = value;
     }).catchError((dynamic error) {
@@ -97,7 +98,7 @@ class UsersController extends GetxController {
   void _callingGetRegion() {
     isLoading.call(true);
     _userService.getuserregion().then((value) {
-      userRegion.value = value;
+      userRegionList.value = value;
     }).catchError((dynamic error) {
       this.error.trigger(error);
       print(error);
@@ -109,7 +110,7 @@ class UsersController extends GetxController {
   void _callingGetAdmin() {
     isLoading.call(true);
     _userService.getuseradmin().then((value) {
-      userAdmin.value = value;
+      userAdminList.value = value;
     }).catchError((dynamic error) {
       this.error.trigger(error);
       print(error);
@@ -121,9 +122,29 @@ class UsersController extends GetxController {
   void _callingGetRemove() {
     isLoading.call(true);
     _userService.getisRemove().then((value) {
-      userRemove.value = value;
+      userRemoveList.value = value;
     }).catchError((dynamic error) {
       this.error.trigger(error);
+      print(error);
+    }).whenComplete(() {
+      isLoading.call(false);
+    });
+  }
+
+  void callingUpdateService(String userid, String username, String email,
+      String admin, String parola, String isremove) {
+    final UpdateRequestModel _userReguest = UpdateRequestModel(
+        userid: userid,
+        username: username,
+        email: email,
+        admin: admin,
+        parola: parola,
+        isremove: isremove);
+    isLoading.call(true);
+    _userService
+        .update(_userReguest)
+        .then((user) {})
+        .catchError((dynamic error) {
       print(error);
     }).whenComplete(() {
       isLoading.call(false);

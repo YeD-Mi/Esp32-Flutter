@@ -5,9 +5,6 @@ import 'package:esp32proje/views/login/login_page.dart';
 import 'package:esp32proje/views/register/register_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:esp32proje/data/src/images.dart';
-import 'package:get/state_manager.dart';
-import 'package:http/http.dart';
 
 String dropdownValue = RegisterController(Get.find()).list.last;
 String username = "";

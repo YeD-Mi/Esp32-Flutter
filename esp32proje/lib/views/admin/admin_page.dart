@@ -40,8 +40,8 @@ class AdminPage extends GetWidget<AdminController> {
                 children: [
                   InkWell(
                     onTap: () {
-                      regionUrl.call('http://sub.mryed.com/esp32/get_ege.php');
-                      Get.toNamed(HomePage.routeName);
+                      regionUrl.call('http://sub.mryed.com/get_ege.php');
+                      Get.offAllNamed(HomePage.routeName);
                     },
                     child: Container(
                       width: Get.width * 0.5,
@@ -81,8 +81,7 @@ class AdminPage extends GetWidget<AdminController> {
                 children: [
                   InkWell(
                     onTap: () {
-                      regionUrl
-                          .call('http://sub.mryed.com/esp32/get_marmara.php');
+                      regionUrl.call('http://sub.mryed.com/get_marmara.php');
                       Get.toNamed(HomePage.routeName);
                     },
                     child: Container(
@@ -127,8 +126,7 @@ class AdminPage extends GetWidget<AdminController> {
                 children: [
                   InkWell(
                     onTap: () {
-                      regionUrl
-                          .call('http://sub.mryed.com/esp32/get_akdeniz.php');
+                      regionUrl.call('http://sub.mryed.com/get_akdeniz.php');
                       Get.toNamed(HomePage.routeName);
                     },
                     child: Container(
@@ -169,8 +167,7 @@ class AdminPage extends GetWidget<AdminController> {
                 children: [
                   InkWell(
                     onTap: () {
-                      regionUrl
-                          .call('http://sub.mryed.com/esp32/get_karadeniz.php');
+                      regionUrl.call('http://sub.mryed.com/get_karadeniz.php');
                       Get.toNamed(HomePage.routeName);
                     },
                     child: Container(
@@ -215,7 +212,7 @@ class AdminPage extends GetWidget<AdminController> {
                 children: [
                   InkWell(
                     onTap: () {
-                      regionUrl.call('http://sub.mryed.com/esp32/get_dogu.php');
+                      regionUrl.call('http://sub.mryed.com/get_dogu.php');
                       Get.toNamed(HomePage.routeName);
                     },
                     child: Container(
@@ -256,8 +253,7 @@ class AdminPage extends GetWidget<AdminController> {
                 children: [
                   InkWell(
                     onTap: () {
-                      regionUrl
-                          .call('http://sub.mryed.com/esp32/get_guneydogu.php');
+                      regionUrl.call('http://sub.mryed.com/get_guneydogu.php');
                       Get.toNamed(HomePage.routeName);
                     },
                     child: Container(
@@ -302,8 +298,7 @@ class AdminPage extends GetWidget<AdminController> {
                 children: [
                   InkWell(
                     onTap: () {
-                      regionUrl
-                          .call('http://sub.mryed.com/esp32/get_icanadolu.php');
+                      regionUrl.call('http://sub.mryed.com/get_icanadolu.php');
                       Get.toNamed(HomePage.routeName);
                     },
                     child: Container(
@@ -375,7 +370,6 @@ class AdminPage extends GetWidget<AdminController> {
                 adminbartxt,
                 style: TextStyle(fontSize: 16, color: floor),
               ),
-              //Sonuna icon eklemek istersek leading yerine; trailing kullanılır.
               leading: Icon(Icons.account_balance_rounded),
               iconColor: floor,
               onTap: () => Get.toNamed(AdminPage.routeName)),
@@ -385,7 +379,6 @@ class AdminPage extends GetWidget<AdminController> {
                 alluserstxt,
                 style: TextStyle(fontSize: 16, color: floor),
               ),
-              //Sonuna icon eklemek istersek leading yerine; trailing kullanılır.
               leading: Icon(Icons.person),
               iconColor: floor,
               onTap: () => Get.toNamed(UsersPage.routeName)),
@@ -395,10 +388,9 @@ class AdminPage extends GetWidget<AdminController> {
                 exittxt,
                 style: TextStyle(fontSize: 16, color: floor),
               ),
-              //Sonuna icon eklemek istersek leading yerine; trailing kullanılır.
               leading: Icon(Icons.logout_outlined),
               iconColor: floor,
-              onTap: () => Get.offNamed(LoginPage.routeName))
+              onTap: () => Get.offAllNamed(LoginPage.routeName))
         ],
       ),
     );

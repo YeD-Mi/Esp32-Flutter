@@ -14,7 +14,8 @@ const String deletedusertxt = 'Kullanici Silinmis. Kod:5';
 const String userappbartxt = 'KULLANICILAR';
 const String searchtxt = 'Ara';
 const String edittxt = 'Düzenle';
-const String deletetxt = 'Sil';
+const String durumtxt = 'Durum Degistir';
+const String statustxt = 'Statu Degistir';
 const String useractivetxt = 'Durum: Aktif';
 const String userpassivetxt = 'Durum: Pasif';
 const String userstatutxt = 'Statu: Standart Kullanici';
@@ -48,13 +49,9 @@ const String aboutcomment =
 const String profiltxt = "Profil";
 
 //http
-final String registerUrl = 'http://sub.mryed.com/esp32/register.php';
-final String loginUrl = 'http://sub.mryed.com/esp32/login.php';
-final String usersUrl = 'http://sub.mryed.com/esp32/get_users.php';
-final String searchUsers = 'http://sub.mryed.com/esp32/search.php';
-final RxnString regionUrl = RxnString('http://sub.mryed.com/esp32/get_ege.php');
-
-@override
-void onInit() {
-  regionUrl;
-}
+final String registerUrl = 'http://sub.mryed.com/register.php';
+final String loginUrl = 'http://sub.mryed.com/login.php';
+final String usersUrl = 'http://sub.mryed.com/get_users.php';
+final String searchUsers = 'http://sub.mryed.com/search.php';
+final String updateUrl = 'http://sub.mryed.com/edit_users.php';
+final RxnString regionUrl = RxnString();

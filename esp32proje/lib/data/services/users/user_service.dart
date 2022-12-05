@@ -1,3 +1,5 @@
+import 'package:esp32proje/data/services/users/model/update_request.dart';
+import 'package:esp32proje/data/services/users/model/update_response.dart';
 import 'package:esp32proje/data/services/users/model/users_response.dart';
 import 'package:esp32proje/data/src/string.dart';
 import 'package:http/http.dart' as http;
@@ -11,10 +13,23 @@ abstract class UserService {
   Future getuserregion();
   Future getuseradmin();
   Future getisRemove();
+  Future update(UpdateRequestModel updateRequestModel);
 }
 
 class UserServiceImp extends UserService {
   @override
+  Future update(UpdateRequestModel updateRequestModel) async {
+    final response = await http.post(Uri.parse(updateUrl),
+        body: updateRequestModel.toJson());
+    if (response.statusCode == 200) {
+      print(successfultxt);
+      return updateResponseModelFromJson(response.body);
+    } else {
+      print(mistaketitle);
+      return '';
+    }
+  }
+
   @override
   Future getusername() async {
     final response = await http.get(Uri.parse(usersUrl));

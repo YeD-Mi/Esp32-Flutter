@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:esp32proje/data/src/colors.dart';
 import 'package:esp32proje/data/src/images.dart';
 import 'package:esp32proje/data/src/string.dart';
-import 'package:esp32proje/views/home/home_page.dart';
 import 'package:esp32proje/views/login/login_controller.dart';
 import 'package:esp32proje/views/register/register_page.dart';
 

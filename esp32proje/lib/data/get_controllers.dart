@@ -1,6 +1,7 @@
 import 'package:esp32proje/data/services/home/home.service.dart';
 import 'package:esp32proje/data/services/users/user_service.dart';
 import 'package:esp32proje/views/admin/admin_controller.dart';
+import 'package:esp32proje/views/profil/profil_controller.dart';
 import 'package:esp32proje/views/users/users_controller.dart';
 import 'package:esp32proje/data/services/login/login_service.dart';
 import 'package:esp32proje/data/services/register/register_service.dart';
@@ -16,6 +17,7 @@ Future getControllers() async {
   Get.create(() => HomeController(Get.find()), permanent: false);
   Get.create(() => UsersController(Get.find()), permanent: false);
   Get.create(() => AdminController(), permanent: false);
+  Get.create(() => ProfilController(Get.find()), permanent: false);
 
   //Services
   Get.lazyPut<UserService>(() => UserServiceImp());
