@@ -86,7 +86,7 @@ class UsersController extends GetxController {
   void _callingGetID() {
     isLoading.call(true);
     _userService.getuserid().then((value) {
-      userIdList.value = value;
+      userIdList.call(value);
     }).catchError((dynamic error) {
       this.error.trigger(error);
       print(error);
@@ -98,7 +98,7 @@ class UsersController extends GetxController {
   void _callingGetRegion() {
     isLoading.call(true);
     _userService.getuserregion().then((value) {
-      userRegionList.value = value;
+      userRegionList.call(value);
     }).catchError((dynamic error) {
       this.error.trigger(error);
       print(error);

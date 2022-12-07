@@ -1,3 +1,4 @@
+import 'package:esp32proje/data/services/register/register_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:esp32proje/data/src/colors.dart';
@@ -5,6 +6,7 @@ import 'package:esp32proje/data/src/images.dart';
 import 'package:esp32proje/data/src/string.dart';
 import 'package:esp32proje/views/login/login_controller.dart';
 import 'package:esp32proje/views/register/register_page.dart';
+import 'package:esp32proje/views/common/common_values.dart';
 
 class LoginPage extends GetWidget<LoginController> {
   const LoginPage({Key? key}) : super(key: key);
@@ -12,14 +14,6 @@ class LoginPage extends GetWidget<LoginController> {
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
-    // controller.error.listen((error) => print("Hata"));
-    // controller.isLogin.listen((isLogin) {
-    //   if (isLogin) Get.offNamed(HomePage.routeName);
-    // });
-    // controller.errorTexts.listen((errorTexts) {
-    //   if (errorTexts != null) print(errorTexts);
-    // });
     return Scaffold(
         appBar: AppBar(
           title: Center(child: Text(loginappbar)),
@@ -127,7 +121,8 @@ class LoginPage extends GetWidget<LoginController> {
                   )),
               ElevatedButton(
                   onPressed: () {
-                    Get.offAndToNamed(RegisterPage.routeName);
+                    Get.lazyPut<RegisterService>(() => RegisterServiceImp());
+                    Get.toNamed(RegisterPage.routeName);
                   },
                   style: ElevatedButton.styleFrom(
                     padding:
@@ -164,7 +159,7 @@ class LoginPage extends GetWidget<LoginController> {
           icon: Icon(Icons.error_outline_outlined, color: primaryColor),
           colorText: borderColor,
           backgroundColor: floor,
-          duration: Duration(seconds: 4),
+          duration: Duration(seconds: 3),
           titleText: Text(
             mistaketitle,
             style: TextStyle(fontSize: 20),

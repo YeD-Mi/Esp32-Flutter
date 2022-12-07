@@ -62,19 +62,19 @@ class HomePage extends GetWidget<HomeController> {
             minWidth: Get.width * 0.9,
             columns: [
               DataColumn2(
-                label: Text('ID'),
+                label: Text(datatableID),
               ),
               DataColumn2(
-                label: Text('Amper'),
+                label: Text(datatableCurrent),
               ),
               DataColumn(
-                label: Text('Volt'),
+                label: Text(datatableVoltage),
               ),
               DataColumn(
-                label: Text('Sıcaklık'),
+                label: Text(datatableTemparature),
               ),
               DataColumn2(
-                label: Text('Tarih'),
+                label: Text(datatableDate),
               ),
             ],
             rows: List<DataRow>.generate(

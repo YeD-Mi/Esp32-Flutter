@@ -3,7 +3,6 @@ import 'package:esp32proje/data/src/colors.dart';
 import 'package:esp32proje/data/src/images.dart';
 import 'package:esp32proje/data/src/string.dart';
 import 'package:esp32proje/views/common/common_values.dart';
-import 'package:esp32proje/views/home/home_controller.dart';
 import 'package:esp32proje/views/home/home_page.dart';
 import 'package:esp32proje/views/login/login_page.dart';
 import 'package:esp32proje/views/profil/profil_controller.dart';
@@ -22,7 +21,7 @@ class ProfilPage extends GetWidget<ProfilController> {
           title: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Center(child: Text("PROFIL")),
+              Center(child: Text(profilappbartxt)),
             ],
           )),
       drawer: _buildDrawer(),
@@ -30,14 +29,15 @@ class ProfilPage extends GetWidget<ProfilController> {
     );
   }
 
-  void _errorDialog() {
-    Get.snackbar(mistaketitle, abouttxt,
-        icon: Icon(Icons.error_outline_outlined, color: primaryColor),
+  void _errorDialog(
+      String title, String message, IconData iconum, Color colorum) {
+    Get.snackbar(title, message,
+        icon: Icon(iconum, color: colorum),
         colorText: borderColor,
         backgroundColor: floor,
-        duration: Duration(seconds: 4),
+        duration: Duration(seconds: 3),
         titleText: Text(
-          mistaketitle,
+          title,
           style: TextStyle(fontSize: 20),
         ));
   }
@@ -128,9 +128,7 @@ class ProfilPage extends GetWidget<ProfilController> {
               "Parola: $loginparola",
             ),
             Divider(),
-            Text(
-              "Statu: $loginisadmin",
-            ),
+            loginisadmin == '1' ? Text(adminstatutxt) : Text(userstatutxt),
             Divider(),
             Text(
               "Bolge: $loginregion",
@@ -196,22 +194,31 @@ class ProfilPage extends GetWidget<ProfilController> {
                   style: ElevatedButton.styleFrom(
                     primary: borderColor,
                   ),
-                  child: Text('Kapat')),
+                  child: Text(backtxt)),
               ElevatedButton(
                   onPressed: () {
-                    controller.callingUpdateService(
-                        loginuserid.obs.string,
-                        loginuser.obs.string,
-                        loginmail.obs.string,
-                        loginisadmin.obs.string,
-                        controller.newparola.obs.string,
-                        "0");
-                    Get.offAllNamed(LoginPage.routeName);
+                    if (controller.newparola.obs.string ==
+                            loginparola.obs.string ||
+                        controller.newparola.toString() == 'null') {
+                      _errorDialog(mistaketitle, editpasswordtxt,
+                          Icons.error_outline_outlined, primaryColor);
+                    } else {
+                      _errorDialog(passwordnewtxt, againlogintxt,
+                          Icons.add_task_outlined, positiveclr);
+                      controller.callingUpdateService(
+                          loginuserid.obs.string,
+                          loginuser.obs.string,
+                          loginmail.obs.string,
+                          loginisadmin.obs.string,
+                          controller.newparola.obs.string,
+                          "0");
+                      Get.offAllNamed(LoginPage.routeName);
+                    }
                   },
                   style: ElevatedButton.styleFrom(
                     primary: borderColor,
                   ),
-                  child: Text('Kaydet')),
+                  child: Text(savetxt)),
             ],
           ),
         ],

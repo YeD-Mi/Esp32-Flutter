@@ -20,9 +20,20 @@ const String useractivetxt = 'Durum: Aktif';
 const String userpassivetxt = 'Durum: Pasif';
 const String userstatutxt = 'Statu: Standart Kullanici';
 const String adminstatutxt = 'Statu: Yonetici';
+const String editusertxt1 = 'Basarili';
+const String editusertxt2 = 'Kullanici bilgileri degistirildi.';
+const String closetxt = 'Kapat';
 
 //Admin Page
 const String adminbartxt = 'Bölgeler';
+
+//Profil Page
+const String profilappbartxt = 'PROFIL';
+const String editpasswordtxt = 'Sifreniz bos veya eski sifreniz olamaz!';
+const String savetxt = 'Kaydet';
+const String backtxt = 'Kapat';
+const String passwordnewtxt = 'Sifre Degisti';
+const String againlogintxt = 'Lutfen tekrar giris yap.';
 
 //Register Page
 const String registerapptxt = 'Üye Kaydı';
@@ -47,6 +58,11 @@ const String abouttxt = "Hakkımızda";
 const String aboutcomment =
     "Cihazların ölçmüş olduğu volt, amper ve sıcaklık bilgilerini buradan görebilirsiniz.";
 const String profiltxt = "Profil";
+const String datatableID = "ID";
+const String datatableCurrent = "Akım";
+const String datatableVoltage = "Volt";
+const String datatableTemparature = "Sıcaklık";
+const String datatableDate = "Tarih";
 
 //http
 final String registerUrl = 'http://sub.mryed.com/register.php';

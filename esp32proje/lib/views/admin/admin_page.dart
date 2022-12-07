@@ -1,4 +1,5 @@
 import 'package:esp32proje/data/services/home/home.service.dart';
+import 'package:esp32proje/data/services/users/user_service.dart';
 import 'package:esp32proje/data/src/colors.dart';
 import 'package:esp32proje/data/src/images.dart';
 import 'package:esp32proje/data/src/string.dart';
@@ -389,7 +390,10 @@ class AdminPage extends GetWidget<AdminController> {
               ),
               leading: Icon(Icons.person),
               iconColor: floor,
-              onTap: () => Get.toNamed(UsersPage.routeName)),
+              onTap: () {
+                Get.lazyPut<UserService>(() => UserServiceImp());
+                Get.toNamed(UsersPage.routeName);
+              }),
           Divider(),
           ListTile(
               title: Text(
