@@ -20,7 +20,7 @@ class RegisterPage extends GetWidget<RegisterController> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Center(child: const Text(registerapptxt)),
+          title: const Center(child: Text(registerapptxt)),
           backgroundColor: primaryColor,
         ),
         body: _buildBody());
@@ -43,7 +43,7 @@ class RegisterPage extends GetWidget<RegisterController> {
                 top: Get.height * 0.02),
             child: _buildRegisterForm(),
           ),
-          DropdownRegion(),
+          const DropdownRegion(),
           _buildButton()
         ],
       ),
@@ -57,7 +57,7 @@ class RegisterPage extends GetWidget<RegisterController> {
         Material(
           elevation: 10,
           color: Colors.white,
-          shape: RoundedRectangleBorder(
+          shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
                 topRight: Radius.circular(250),
                 topLeft: Radius.circular(10),
@@ -71,7 +71,7 @@ class RegisterPage extends GetWidget<RegisterController> {
                 eposta = value;
               },
               textInputAction: TextInputAction.next,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                   border: InputBorder.none, hintText: registermail),
             ),
           ),
@@ -80,7 +80,7 @@ class RegisterPage extends GetWidget<RegisterController> {
         Material(
           elevation: 10,
           color: Colors.white,
-          shape: RoundedRectangleBorder(
+          shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(10))),
           child: Padding(
             padding: const EdgeInsets.fromLTRB(20, 3, 15, 3),
@@ -89,7 +89,7 @@ class RegisterPage extends GetWidget<RegisterController> {
                 username = value;
               },
               textInputAction: TextInputAction.next,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                   border: InputBorder.none, hintText: registernick),
             ),
           ),
@@ -98,7 +98,7 @@ class RegisterPage extends GetWidget<RegisterController> {
         Material(
           elevation: 10,
           color: Colors.white,
-          shape: RoundedRectangleBorder(
+          shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(10))),
           child: Padding(
             padding: const EdgeInsets.fromLTRB(20, 3, 15, 3),
@@ -108,7 +108,7 @@ class RegisterPage extends GetWidget<RegisterController> {
               },
               obscureText: true,
               textInputAction: TextInputAction.next,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                   border: InputBorder.none, hintText: registerpassword),
             ),
           ),
@@ -117,7 +117,7 @@ class RegisterPage extends GetWidget<RegisterController> {
         Material(
           elevation: 10,
           color: Colors.white,
-          shape: RoundedRectangleBorder(
+          shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
               bottomRight: Radius.circular(250),
               bottomLeft: Radius.circular(10),
@@ -133,7 +133,7 @@ class RegisterPage extends GetWidget<RegisterController> {
               },
               obscureText: true,
               textInputAction: TextInputAction.next,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                   border: InputBorder.none, hintText: againpasswordtxt),
             ),
           ),
@@ -153,7 +153,7 @@ class RegisterPage extends GetWidget<RegisterController> {
             image: DecorationImage(
               colorFilter: ColorFilter.mode(
                   primaryColor.withOpacity(0.9), BlendMode.dstATop),
-              image: AssetImage(lamp),
+              image: const AssetImage(lamp),
               fit: BoxFit.cover,
             ),
           ),
@@ -171,16 +171,16 @@ class RegisterPage extends GetWidget<RegisterController> {
           child: ElevatedButton(
               onPressed: () => _onTap(),
               style: ElevatedButton.styleFrom(
-                padding: EdgeInsets.all(2),
-                primary: primaryColor,
-                shape: StadiumBorder(),
-                side: BorderSide(color: borderColor, width: 2),
+                padding: const EdgeInsets.all(2),
+                backgroundColor: primaryColor,
+                shape: const StadiumBorder(),
+                side: const BorderSide(color: borderColor, width: 2),
               ),
-              child: Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: const Text(
+              child: const Padding(
+                padding: EdgeInsets.all(10.0),
+                child: Text(
                   signupbutton,
-                  style: const TextStyle(fontSize: 18),
+                  style: TextStyle(fontSize: 18),
                 ),
               )),
         ),
@@ -201,33 +201,33 @@ class RegisterPage extends GetWidget<RegisterController> {
           password,
         );
         Get.snackbar(welcometxt + username, successfultxt,
-            icon: Icon(Icons.back_hand_outlined, color: positiveclr),
+            icon: const Icon(Icons.back_hand_outlined, color: positiveclr),
             colorText: borderColor,
             backgroundColor: floor,
-            duration: Duration(seconds: 4),
+            duration: const Duration(seconds: 4),
             titleText: Text(
               welcometxt + username,
-              style: TextStyle(fontSize: 20),
+              style: const TextStyle(fontSize: 20),
             ));
         Get.offAndToNamed(LoginPage.routeName);
       } else {
         Get.snackbar(mistaketitle, passworderror,
-            icon: Icon(Icons.error_outline_outlined, color: primaryColor),
+            icon: const Icon(Icons.error_outline_outlined, color: primaryColor),
             colorText: borderColor,
             backgroundColor: floor,
-            duration: Duration(seconds: 4),
-            titleText: Text(
+            duration: const Duration(seconds: 4),
+            titleText: const Text(
               mistaketitle,
               style: TextStyle(fontSize: 20),
             ));
       }
     } else {
       Get.snackbar(mistaketitle, mistakecomment,
-          icon: Icon(Icons.error_outline_outlined, color: primaryColor),
+          icon: const Icon(Icons.error_outline_outlined, color: primaryColor),
           colorText: borderColor,
           backgroundColor: floor,
-          duration: Duration(seconds: 4),
-          titleText: Text(
+          duration: const Duration(seconds: 4),
+          titleText: const Text(
             mistaketitle,
             style: TextStyle(fontSize: 20),
           ));
@@ -270,7 +270,6 @@ class _DropdownButton extends State<DropdownRegion> {
               // This is called when the user selects an item.
               setState(() {
                 dropdownValue = value!;
-                print(dropdownValue);
               });
             },
             items: RegisterController(Get.find())

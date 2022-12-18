@@ -22,7 +22,7 @@ class AdminPage extends GetWidget<AdminController> {
           title: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
+            children: const [
               Center(child: Text(adminbartxt)),
             ],
           ),
@@ -42,7 +42,7 @@ class AdminPage extends GetWidget<AdminController> {
                 children: [
                   InkWell(
                     onTap: () {
-                      regionUrl.call('http://sub.mryed.com/get_ege.php');
+                      regionUrl.call(egeLink);
                       Get.lazyPut<HomeService>(() => HomeServiceImp());
                       Get.offAllNamed(HomePage.routeName);
                     },
@@ -55,7 +55,7 @@ class AdminPage extends GetWidget<AdminController> {
                         image: DecorationImage(
                           colorFilter: ColorFilter.mode(
                               primaryColor.withOpacity(0.9), BlendMode.dstATop),
-                          image: AssetImage(egeimage),
+                          image: const AssetImage(egeimage),
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -66,8 +66,8 @@ class AdminPage extends GetWidget<AdminController> {
                         left: Get.width * 0.05, top: Get.height * 0.02),
                     child: Container(
                       color: borderColor,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
+                      child: const Padding(
+                        padding: EdgeInsets.all(8.0),
                         child: Text(
                           "Ege",
                           style: TextStyle(
@@ -84,7 +84,7 @@ class AdminPage extends GetWidget<AdminController> {
                 children: [
                   InkWell(
                     onTap: () {
-                      regionUrl.call('http://sub.mryed.com/get_marmara.php');
+                      regionUrl.call(marmaraLink);
                       Get.lazyPut<HomeService>(() => HomeServiceImp());
                       Get.toNamed(HomePage.routeName);
                     },
@@ -97,7 +97,7 @@ class AdminPage extends GetWidget<AdminController> {
                         image: DecorationImage(
                           colorFilter: ColorFilter.mode(
                               primaryColor.withOpacity(0.9), BlendMode.dstATop),
-                          image: AssetImage(marmaraimage),
+                          image: const AssetImage(marmaraimage),
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -108,8 +108,8 @@ class AdminPage extends GetWidget<AdminController> {
                         left: Get.width * 0.05, top: Get.height * 0.02),
                     child: Container(
                       color: borderColor,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
+                      child: const Padding(
+                        padding: EdgeInsets.all(8.0),
                         child: Text(
                           "Marmara",
                           style: TextStyle(
@@ -130,7 +130,7 @@ class AdminPage extends GetWidget<AdminController> {
                 children: [
                   InkWell(
                     onTap: () {
-                      regionUrl.call('http://sub.mryed.com/get_akdeniz.php');
+                      regionUrl.call(akdenizLink);
                       Get.lazyPut<HomeService>(() => HomeServiceImp());
                       Get.toNamed(HomePage.routeName);
                     },
@@ -143,7 +143,7 @@ class AdminPage extends GetWidget<AdminController> {
                         image: DecorationImage(
                           colorFilter: ColorFilter.mode(
                               primaryColor.withOpacity(0.9), BlendMode.dstATop),
-                          image: AssetImage(akdenizimage),
+                          image: const AssetImage(akdenizimage),
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -154,8 +154,8 @@ class AdminPage extends GetWidget<AdminController> {
                         left: Get.width * 0.05, top: Get.height * 0.02),
                     child: Container(
                       color: borderColor,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
+                      child: const Padding(
+                        padding: EdgeInsets.all(8.0),
                         child: Text(
                           "Akdeniz",
                           style: TextStyle(
@@ -172,7 +172,7 @@ class AdminPage extends GetWidget<AdminController> {
                 children: [
                   InkWell(
                     onTap: () {
-                      regionUrl.call('http://sub.mryed.com/get_karadeniz.php');
+                      regionUrl.call(karadenizLink);
                       Get.lazyPut<HomeService>(() => HomeServiceImp());
                       Get.toNamed(HomePage.routeName);
                     },
@@ -185,7 +185,7 @@ class AdminPage extends GetWidget<AdminController> {
                         image: DecorationImage(
                           colorFilter: ColorFilter.mode(
                               primaryColor.withOpacity(0.9), BlendMode.dstATop),
-                          image: AssetImage(karadenizimage),
+                          image: const AssetImage(karadenizimage),
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -196,8 +196,8 @@ class AdminPage extends GetWidget<AdminController> {
                         left: Get.width * 0.05, top: Get.height * 0.02),
                     child: Container(
                       color: borderColor,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
+                      child: const Padding(
+                        padding: EdgeInsets.all(8.0),
                         child: Text(
                           "Karadeniz",
                           style: TextStyle(
@@ -218,7 +218,7 @@ class AdminPage extends GetWidget<AdminController> {
                 children: [
                   InkWell(
                     onTap: () {
-                      regionUrl.call('http://sub.mryed.com/get_dogu.php');
+                      regionUrl.call(doguLink);
                       Get.lazyPut<HomeService>(() => HomeServiceImp());
                       Get.toNamed(HomePage.routeName);
                     },
@@ -231,7 +231,7 @@ class AdminPage extends GetWidget<AdminController> {
                         image: DecorationImage(
                           colorFilter: ColorFilter.mode(
                               primaryColor.withOpacity(0.9), BlendMode.dstATop),
-                          image: AssetImage(doguimage),
+                          image: const AssetImage(doguimage),
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -242,8 +242,8 @@ class AdminPage extends GetWidget<AdminController> {
                         left: Get.width * 0.05, top: Get.height * 0.02),
                     child: Container(
                       color: borderColor,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
+                      child: const Padding(
+                        padding: EdgeInsets.all(8.0),
                         child: Text(
                           "Doğu Anadolu",
                           style: TextStyle(
@@ -260,7 +260,7 @@ class AdminPage extends GetWidget<AdminController> {
                 children: [
                   InkWell(
                     onTap: () {
-                      regionUrl.call('http://sub.mryed.com/get_guneydogu.php');
+                      regionUrl.call(guneydoguLink);
                       Get.lazyPut<HomeService>(() => HomeServiceImp());
                       Get.toNamed(HomePage.routeName);
                     },
@@ -273,7 +273,7 @@ class AdminPage extends GetWidget<AdminController> {
                         image: DecorationImage(
                           colorFilter: ColorFilter.mode(
                               primaryColor.withOpacity(0.9), BlendMode.dstATop),
-                          image: AssetImage(guneydoguimage),
+                          image: const AssetImage(guneydoguimage),
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -284,8 +284,8 @@ class AdminPage extends GetWidget<AdminController> {
                         left: Get.width * 0.05, top: Get.height * 0.02),
                     child: Container(
                       color: borderColor,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
+                      child: const Padding(
+                        padding: EdgeInsets.all(8.0),
                         child: Text(
                           "Güneydoğu",
                           style: TextStyle(
@@ -306,7 +306,7 @@ class AdminPage extends GetWidget<AdminController> {
                 children: [
                   InkWell(
                     onTap: () {
-                      regionUrl.call('http://sub.mryed.com/get_icanadolu.php');
+                      regionUrl.call(icAnadoluLink);
                       Get.lazyPut<HomeService>(() => HomeServiceImp());
                       Get.toNamed(HomePage.routeName);
                     },
@@ -319,7 +319,7 @@ class AdminPage extends GetWidget<AdminController> {
                         image: DecorationImage(
                           colorFilter: ColorFilter.mode(
                               primaryColor.withOpacity(0.9), BlendMode.dstATop),
-                          image: AssetImage(icimage),
+                          image: const AssetImage(icimage),
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -330,8 +330,8 @@ class AdminPage extends GetWidget<AdminController> {
                         left: Get.width * 0.1, top: Get.height * 0.05),
                     child: Container(
                       color: borderColor,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
+                      child: const Padding(
+                        padding: EdgeInsets.all(8.0),
                         child: Text(
                           "İç Anadolu",
                           style: TextStyle(
@@ -357,50 +357,50 @@ class AdminPage extends GetWidget<AdminController> {
       child: ListView(
         children: [
           UserAccountsDrawerHeader(
-              decoration: BoxDecoration(color: floor),
+              decoration: const BoxDecoration(color: floor),
               currentAccountPicture:
-                  CircleAvatar(backgroundImage: AssetImage(defaultimage)),
+                  const CircleAvatar(backgroundImage: AssetImage(defaultimage)),
               accountName: Text(
                 welcometxt + loginuser(),
-                style: TextStyle(color: primaryColor),
+                style: const TextStyle(color: primaryColor),
               ),
-              accountEmail:
-                  Text(loginregion(), style: TextStyle(color: primaryColor))),
-          ListTile(
+              accountEmail: Text(loginregion(),
+                  style: const TextStyle(color: primaryColor))),
+          const ListTile(
             title: Text(abouttxt, style: TextStyle(fontSize: 16, color: floor)),
             leading: Icon(Icons.info_rounded),
             iconColor: floor,
             subtitle: Text(aboutcomment,
                 style: TextStyle(fontSize: 13, color: floor)),
           ),
-          Divider(),
+          const Divider(),
           ListTile(
-              title: Text(
+              title: const Text(
                 adminbartxt,
                 style: TextStyle(fontSize: 16, color: floor),
               ),
-              leading: Icon(Icons.account_balance_rounded),
+              leading: const Icon(Icons.account_balance_rounded),
               iconColor: floor,
               onTap: () => Get.toNamed(AdminPage.routeName)),
-          Divider(),
+          const Divider(),
           ListTile(
-              title: Text(
+              title: const Text(
                 alluserstxt,
                 style: TextStyle(fontSize: 16, color: floor),
               ),
-              leading: Icon(Icons.person),
+              leading: const Icon(Icons.person),
               iconColor: floor,
               onTap: () {
                 Get.lazyPut<UserService>(() => UserServiceImp());
                 Get.toNamed(UsersPage.routeName);
               }),
-          Divider(),
+          const Divider(),
           ListTile(
-              title: Text(
+              title: const Text(
                 exittxt,
                 style: TextStyle(fontSize: 16, color: floor),
               ),
-              leading: Icon(Icons.logout_outlined),
+              leading: const Icon(Icons.logout_outlined),
               iconColor: floor,
               onTap: () => Get.offAllNamed(LoginPage.routeName))
         ],

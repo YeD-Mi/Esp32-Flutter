@@ -14,9 +14,9 @@ class RegisterServiceImp extends RegisterService {
         body: registerRequestModel.toJson());
 
     if (response.statusCode == 200) {
-      print(successfultxt);
       return registerResponseModelFromJson(response.body);
     } else {
+      // ignore: avoid_print
       print(mistaketitle);
       return '';
     }

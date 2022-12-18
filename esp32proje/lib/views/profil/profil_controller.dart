@@ -5,15 +5,13 @@ import 'package:get/state_manager.dart';
 class ProfilController extends GetxController {
   final Rx<bool> isLoading = RxBool(false);
   final Rxn<dynamic> error = Rxn<dynamic>();
-
   final RxnString newparola = RxnString();
-
   final UserService _userService;
   ProfilController(this._userService);
 
   void callingUpdateService(String userid, String username, String email,
       String admin, String parola, String isremove) {
-    final UpdateRequestModel _userReguest = UpdateRequestModel(
+    final UpdateRequestModel userReguest = UpdateRequestModel(
         userid: userid,
         username: username,
         email: email,
@@ -22,9 +20,10 @@ class ProfilController extends GetxController {
         isremove: isremove);
     isLoading.call(true);
     _userService
-        .update(_userReguest)
+        .update(userReguest)
         .then((user) {})
         .catchError((dynamic error) {
+      // ignore: avoid_print
       print(error);
     }).whenComplete(() {
       isLoading.call(false);

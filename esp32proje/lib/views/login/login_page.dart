@@ -6,7 +6,6 @@ import 'package:esp32proje/data/src/images.dart';
 import 'package:esp32proje/data/src/string.dart';
 import 'package:esp32proje/views/login/login_controller.dart';
 import 'package:esp32proje/views/register/register_page.dart';
-import 'package:esp32proje/views/common/common_values.dart';
 
 class LoginPage extends GetWidget<LoginController> {
   const LoginPage({Key? key}) : super(key: key);
@@ -16,7 +15,7 @@ class LoginPage extends GetWidget<LoginController> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Center(child: Text(loginappbar)),
+          title: const Center(child: Text(loginappbar)),
           backgroundColor: primaryColor,
         ),
         body: _buildBody());
@@ -37,7 +36,7 @@ class LoginPage extends GetWidget<LoginController> {
         image: DecorationImage(
           colorFilter: ColorFilter.mode(
               primaryColor.withOpacity(0.9), BlendMode.dstATop),
-          image: AssetImage(electric),
+          image: const AssetImage(electric),
           fit: BoxFit.cover,
         ),
       ),
@@ -68,7 +67,7 @@ class LoginPage extends GetWidget<LoginController> {
                 controller: controller.usernameController,
                 textInputAction: TextInputAction.next,
                 cursorColor: Colors.amber,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                     prefixIcon: Icon(
                       Icons.person,
                       color: primaryColor,
@@ -90,7 +89,7 @@ class LoginPage extends GetWidget<LoginController> {
                 controller: controller.passwordControler,
                 obscureText: true,
                 cursorColor: Colors.amber,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                     prefixIcon: Icon(
                       Icons.lock,
                       color: primaryColor,
@@ -106,14 +105,14 @@ class LoginPage extends GetWidget<LoginController> {
                     _onTap();
                   },
                   style: ElevatedButton.styleFrom(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 15, vertical: 5.0),
-                    primary: primaryColor,
-                    shape: StadiumBorder(),
-                    side: BorderSide(color: borderColor, width: 2),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 15, vertical: 5.0),
+                    backgroundColor: primaryColor,
+                    shape: const StadiumBorder(),
+                    side: const BorderSide(color: borderColor, width: 2),
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                  child: const Padding(
+                    padding: EdgeInsets.all(8.0),
                     child: Text(
                       loginbutton,
                       style: TextStyle(fontSize: 16),
@@ -125,17 +124,17 @@ class LoginPage extends GetWidget<LoginController> {
                     Get.toNamed(RegisterPage.routeName);
                   },
                   style: ElevatedButton.styleFrom(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 15, vertical: 5.0),
-                    primary: primaryColor,
-                    shape: StadiumBorder(),
-                    side: BorderSide(color: borderColor, width: 2),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 15, vertical: 5.0),
+                    backgroundColor: primaryColor,
+                    shape: const StadiumBorder(),
+                    side: const BorderSide(color: borderColor, width: 2),
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: const Text(
+                  child: const Padding(
+                    padding: EdgeInsets.all(10.0),
+                    child: Text(
                       signupbutton,
-                      style: const TextStyle(fontSize: 16),
+                      style: TextStyle(fontSize: 16),
                     ),
                   )),
             ],
@@ -156,11 +155,11 @@ class LoginPage extends GetWidget<LoginController> {
           controller.passwordControler.text);
     } else {
       Get.snackbar(mistaketitle, mistakecomment,
-          icon: Icon(Icons.error_outline_outlined, color: primaryColor),
+          icon: const Icon(Icons.error_outline_outlined, color: primaryColor),
           colorText: borderColor,
           backgroundColor: floor,
-          duration: Duration(seconds: 3),
-          titleText: Text(
+          duration: const Duration(seconds: 3),
+          titleText: const Text(
             mistaketitle,
             style: TextStyle(fontSize: 20),
           ));

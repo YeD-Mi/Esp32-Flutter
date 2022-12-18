@@ -14,7 +14,6 @@ class LoginServiceImp extends LoginService {
         await http.post(Uri.parse(loginUrl), body: loginRequestModel.toJson());
 
     if (response.statusCode == 200) {
-      print("Kayıt Basarili");
       return loginResponseModelFromJson(response.body);
     } else {
       return '';

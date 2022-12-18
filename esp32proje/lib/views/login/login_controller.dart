@@ -41,37 +41,37 @@ class LoginController extends GetxController {
             Get.offAllNamed(AdminPage.routeName);
             break;
           case 'Ege':
-            regionUrl.call('http://sub.mryed.com/get_ege.php');
+            regionUrl.call(egeLink);
             Get.lazyPut<HomeService>(() => HomeServiceImp());
             Get.offAllNamed(HomePage.routeName);
             break;
           case 'Marmara':
-            regionUrl.call('http://sub.mryed.com/get_marmara.php');
+            regionUrl.call(marmaraLink);
             Get.lazyPut<HomeService>(() => HomeServiceImp());
             Get.offAllNamed(HomePage.routeName);
             break;
           case 'Karadeniz':
-            regionUrl.call('http://sub.mryed.com/get_karadeniz.php');
+            regionUrl.call(karadenizLink);
             Get.lazyPut<HomeService>(() => HomeServiceImp());
             Get.toNamed(HomePage.routeName);
             break;
           case 'Dogu':
-            regionUrl.call('http://sub.mryed.com/get_dogu.php');
+            regionUrl.call(doguLink);
             Get.lazyPut<HomeService>(() => HomeServiceImp());
             Get.offAllNamed(HomePage.routeName);
             break;
           case 'Akdeniz':
-            regionUrl.call('http://sub.mryed.com/get_akdeniz.php');
+            regionUrl.call(akdenizLink);
             Get.lazyPut<HomeService>(() => HomeServiceImp());
             Get.offAllNamed(HomePage.routeName);
             break;
           case 'Guney Dogu':
-            regionUrl.call('http://sub.mryed.com/get_guneydogu.php');
+            regionUrl.call(guneydoguLink);
             Get.lazyPut<HomeService>(() => HomeServiceImp());
             Get.offAllNamed(HomePage.routeName);
             break;
           case 'Ic Anadolu':
-            regionUrl.call('http://sub.mryed.com/get_icanadolu.php');
+            regionUrl.call(icAnadoluLink);
             Get.lazyPut<HomeService>(() => HomeServiceImp());
             Get.offAllNamed(HomePage.routeName);
             break;
@@ -79,33 +79,33 @@ class LoginController extends GetxController {
       }
       if (user.statu == 1) {
         Get.snackbar(mistaketitle, wrongPasswordtxt,
-            icon: Icon(Icons.error_outline_outlined, color: primaryColor),
+            icon: const Icon(Icons.error_outline_outlined, color: primaryColor),
             colorText: borderColor,
             backgroundColor: floor,
-            duration: Duration(seconds: 4),
-            titleText: Text(
+            duration: const Duration(seconds: 4),
+            titleText: const Text(
               mistaketitle,
               style: TextStyle(fontSize: 20),
             ));
       }
       if (user.statu == 0) {
         Get.snackbar(mistaketitle, noUsertxt,
-            icon: Icon(Icons.error_outline_outlined, color: primaryColor),
+            icon: const Icon(Icons.error_outline_outlined, color: primaryColor),
             colorText: borderColor,
             backgroundColor: floor,
-            duration: Duration(seconds: 4),
-            titleText: Text(
+            duration: const Duration(seconds: 4),
+            titleText: const Text(
               mistaketitle,
               style: TextStyle(fontSize: 20),
             ));
       }
       if (user.statu == 3) {
         Get.snackbar(mistaketitle, deletedusertxt,
-            icon: Icon(Icons.error_outline_outlined, color: primaryColor),
+            icon: const Icon(Icons.error_outline_outlined, color: primaryColor),
             colorText: borderColor,
             backgroundColor: floor,
-            duration: Duration(seconds: 4),
-            titleText: Text(
+            duration: const Duration(seconds: 4),
+            titleText: const Text(
               mistaketitle,
               style: TextStyle(fontSize: 20),
             ));

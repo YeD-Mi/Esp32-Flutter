@@ -10,7 +10,7 @@ class RegisterController extends GetxController {
   RegisterController(this._registerService);
   void callingRegisterService(
       String username, String email, String region, String parola) {
-    final RegisterRequestModel _userReguest = RegisterRequestModel(
+    final RegisterRequestModel userReguest = RegisterRequestModel(
       username: username,
       email: email,
       region: region,
@@ -18,9 +18,10 @@ class RegisterController extends GetxController {
     );
     isLoading.call(true);
     _registerService
-        .register(_userReguest)
+        .register(userReguest)
         .then((user) {})
         .catchError((dynamic error) {
+      // ignore: avoid_print
       print(error);
     }).whenComplete(() {
       isLoading.call(false);

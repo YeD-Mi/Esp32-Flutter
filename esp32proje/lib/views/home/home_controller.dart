@@ -31,6 +31,7 @@ class HomeController extends GetxController {
       dataIdList.value = value;
     }).catchError((dynamic error) {
       this.error.trigger(error);
+      // ignore: avoid_print
       print(error);
     }).whenComplete(() {
       isLoading.call(false);
@@ -43,6 +44,7 @@ class HomeController extends GetxController {
       dataCurrentList.value = value;
     }).catchError((dynamic error) {
       this.error.trigger(error);
+      // ignore: avoid_print
       print(error);
     }).whenComplete(() {
       isLoading.call(false);
@@ -55,6 +57,7 @@ class HomeController extends GetxController {
       dataVoltageList.value = value;
     }).catchError((dynamic error) {
       this.error.trigger(error);
+      // ignore: avoid_print
       print(error);
     }).whenComplete(() {
       isLoading.call(false);
@@ -67,6 +70,7 @@ class HomeController extends GetxController {
       dataTemperatureList.value = value;
     }).catchError((dynamic error) {
       this.error.trigger(error);
+      // ignore: avoid_print
       print(error);
     }).whenComplete(() {
       isLoading.call(false);
@@ -79,6 +83,7 @@ class HomeController extends GetxController {
       dataDateList.value = value;
     }).catchError((dynamic error) {
       this.error.trigger(error);
+      // ignore: avoid_print
       print(error);
     }).whenComplete(() {
       isLoading.call(false);

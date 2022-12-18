@@ -1,6 +1,16 @@
-//Login Page
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 
+//Globak
+
+const String egeLink = 'http://sub.mryed.com/get_ege.php';
+const String marmaraLink = 'http://sub.mryed.com/get_marmara.php';
+const String akdenizLink = 'http://sub.mryed.com/get_akdeniz.php';
+const String karadenizLink = 'http://sub.mryed.com/get_karadeniz.php';
+const String doguLink = 'http://sub.mryed.com/get_dogu.php';
+const String guneydoguLink = 'http://sub.mryed.com/get_guneydogu.php';
+const String icAnadoluLink = 'http://sub.mryed.com/get_icanadolu.php';
+
+//Login Page
 const String loginappbar = 'ESP32 Proje';
 const String loginbutton = 'Giriş Yap';
 const String signupbutton = 'Kayıt Ol';
@@ -65,9 +75,9 @@ const String datatableTemparature = "Sıcaklık";
 const String datatableDate = "Tarih";
 
 //http
-final String registerUrl = 'http://sub.mryed.com/register.php';
-final String loginUrl = 'http://sub.mryed.com/login.php';
-final String usersUrl = 'http://sub.mryed.com/get_users.php';
-final String searchUsers = 'http://sub.mryed.com/search.php';
-final String updateUrl = 'http://sub.mryed.com/edit_users.php';
+const String registerUrl = 'http://sub.mryed.com/register.php';
+const String loginUrl = 'http://sub.mryed.com/login.php';
+const String usersUrl = 'http://sub.mryed.com/get_users.php';
+const String searchUsers = 'http://sub.mryed.com/search.php';
+const String updateUrl = 'http://sub.mryed.com/edit_users.php';
 final RxnString regionUrl = RxnString();

@@ -1,19 +1,18 @@
 import 'package:esp32proje/data/services/home/model/home_response.dart';
-import 'package:esp32proje/data/src/string.dart';
 import 'package:http/http.dart' as http;
 
 abstract class HomeService {
-  Future getdataid(String deneUrl);
-  Future getdataCurrent(String deneUrl);
-  Future getdataVoltage(String deneUrl);
-  Future getdataTemperature(String deneUrl);
-  Future getdataDate(String deneUrl);
+  Future getdataid(String dataUrl);
+  Future getdataCurrent(String dataUrl);
+  Future getdataVoltage(String dataUrl);
+  Future getdataTemperature(String dataUrl);
+  Future getdataDate(String dataUrl);
 }
 
 class HomeServiceImp extends HomeService {
   @override
-  Future getdataid(String Url) async {
-    final response = await http.get(Uri.parse(Url));
+  Future getdataid(String dataUrl) async {
+    final response = await http.get(Uri.parse(dataUrl));
     var dataIdList = [];
     if (response.statusCode == 200) {
       var data = homeResponseModelFromJson(response.body);
@@ -26,8 +25,9 @@ class HomeServiceImp extends HomeService {
     }
   }
 
-  Future getdataCurrent(String Url) async {
-    final response = await http.get(Uri.parse(Url));
+  @override
+  Future getdataCurrent(String dataUrl) async {
+    final response = await http.get(Uri.parse(dataUrl));
 
     var dataCurrentList = [];
 
@@ -42,8 +42,9 @@ class HomeServiceImp extends HomeService {
     }
   }
 
-  Future getdataVoltage(String Url) async {
-    final response = await http.get(Uri.parse(Url));
+  @override
+  Future getdataVoltage(String dataUrl) async {
+    final response = await http.get(Uri.parse(dataUrl));
 
     var dataVoltageList = [];
 
@@ -58,8 +59,9 @@ class HomeServiceImp extends HomeService {
     }
   }
 
-  Future getdataTemperature(String Url) async {
-    final response = await http.get(Uri.parse(Url));
+  @override
+  Future getdataTemperature(String dataUrl) async {
+    final response = await http.get(Uri.parse(dataUrl));
 
     var dataTemperatureList = [];
 
@@ -74,8 +76,9 @@ class HomeServiceImp extends HomeService {
     }
   }
 
-  Future getdataDate(String Url) async {
-    final response = await http.get(Uri.parse(Url));
+  @override
+  Future getdataDate(String dataUrl) async {
+    final response = await http.get(Uri.parse(dataUrl));
 
     var dataDateList = [];
 

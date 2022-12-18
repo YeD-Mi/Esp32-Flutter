@@ -22,9 +22,9 @@ class UserServiceImp extends UserService {
     final response = await http.post(Uri.parse(updateUrl),
         body: updateRequestModel.toJson());
     if (response.statusCode == 200) {
-      print(successfultxt);
       return updateResponseModelFromJson(response.body);
     } else {
+      // ignore: avoid_print
       print(mistaketitle);
       return '';
     }
@@ -47,6 +47,7 @@ class UserServiceImp extends UserService {
     }
   }
 
+  @override
   Future getUserEmail() async {
     final response = await http.get(Uri.parse(usersUrl));
 
@@ -65,8 +66,8 @@ class UserServiceImp extends UserService {
 
   @override
   Future getDate() async {
-    var _url = Uri.parse(usersUrl);
-    final response = await http.get(_url);
+    var url = Uri.parse(usersUrl);
+    final response = await http.get(url);
     var userListDate = [];
 
     if (response.statusCode == 200) {
@@ -80,6 +81,7 @@ class UserServiceImp extends UserService {
     }
   }
 
+  @override
   Future getuserparola() async {
     final response = await http.get(Uri.parse(usersUrl));
     var userListparola = [];
@@ -94,6 +96,7 @@ class UserServiceImp extends UserService {
     }
   }
 
+  @override
   Future getuserid() async {
     final response = await http.get(Uri.parse(usersUrl));
     var userListId = [];
@@ -108,6 +111,7 @@ class UserServiceImp extends UserService {
     }
   }
 
+  @override
   Future getuserregion() async {
     final response = await http.get(Uri.parse(usersUrl));
     var userListRegion = [];
@@ -122,6 +126,7 @@ class UserServiceImp extends UserService {
     }
   }
 
+  @override
   Future getuseradmin() async {
     final response = await http.get(Uri.parse(usersUrl));
     var userListAdmin = [];
@@ -136,6 +141,7 @@ class UserServiceImp extends UserService {
     }
   }
 
+  @override
   Future getisRemove() async {
     final response = await http.get(Uri.parse(usersUrl));
     var userisRemove = [];

@@ -20,7 +20,7 @@ class ProfilPage extends GetWidget<ProfilController> {
           backgroundColor: primaryColor,
           title: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
+            children: const [
               Center(child: Text(profilappbartxt)),
             ],
           )),
@@ -35,10 +35,10 @@ class ProfilPage extends GetWidget<ProfilController> {
         icon: Icon(iconum, color: colorum),
         colorText: borderColor,
         backgroundColor: floor,
-        duration: Duration(seconds: 3),
+        duration: const Duration(seconds: 3),
         titleText: Text(
           title,
-          style: TextStyle(fontSize: 20),
+          style: const TextStyle(fontSize: 20),
         ));
   }
 
@@ -48,41 +48,41 @@ class ProfilPage extends GetWidget<ProfilController> {
       child: ListView(
         children: [
           UserAccountsDrawerHeader(
-              decoration: BoxDecoration(color: floor),
+              decoration: const BoxDecoration(color: floor),
               currentAccountPicture:
-                  CircleAvatar(backgroundImage: AssetImage(defaultimage)),
+                  const CircleAvatar(backgroundImage: AssetImage(defaultimage)),
               accountName: Text(
                 welcometxt + loginuser(),
-                style: TextStyle(color: primaryColor),
+                style: const TextStyle(color: primaryColor),
               ),
-              accountEmail:
-                  Text(loginregion(), style: TextStyle(color: primaryColor))),
-          ListTile(
+              accountEmail: Text(loginregion(),
+                  style: const TextStyle(color: primaryColor))),
+          const ListTile(
             title: Text(abouttxt, style: TextStyle(fontSize: 16, color: floor)),
             leading: Icon(Icons.info_rounded),
             iconColor: floor,
             subtitle: Text(aboutcomment,
                 style: TextStyle(fontSize: 13, color: floor)),
           ),
-          Divider(),
+          const Divider(),
           ListTile(
               title: Text(
-                loginregion.obs.string + " Verileri",
-                style: TextStyle(fontSize: 16, color: floor),
+                "${loginregion.obs.string} Verileri",
+                style: const TextStyle(fontSize: 16, color: floor),
               ),
-              leading: Icon(Icons.home),
+              leading: const Icon(Icons.home),
               iconColor: floor,
               onTap: () {
                 Get.lazyPut<HomeService>(() => HomeServiceImp());
                 Get.offAllNamed(HomePage.routeName);
               }),
-          Divider(),
+          const Divider(),
           ListTile(
-              title: Text(
+              title: const Text(
                 exittxt,
                 style: TextStyle(fontSize: 16, color: floor),
               ),
-              leading: Icon(Icons.logout_outlined),
+              leading: const Icon(Icons.logout_outlined),
               iconColor: floor,
               onTap: () => Get.offAllNamed(LoginPage.routeName))
         ],
@@ -114,34 +114,37 @@ class ProfilPage extends GetWidget<ProfilController> {
             Text(
               "Uye No: $loginuserid ",
             ),
-            Divider(),
+            const Divider(),
             Text(
               "Kullanici Adi: $loginuser",
-              style: TextStyle(fontWeight: FontWeight.bold),
+              style: const TextStyle(fontWeight: FontWeight.bold),
             ),
-            Divider(),
+            const Divider(),
             Text(
               "E-Posta Adresi: $loginmail",
             ),
-            Divider(),
+            const Divider(),
             Text(
               "Parola: $loginparola",
             ),
-            Divider(),
-            loginisadmin == '1' ? Text(adminstatutxt) : Text(userstatutxt),
-            Divider(),
+            const Divider(),
+            // ignore: unrelated_type_equality_checks
+            loginisadmin == '1'
+                ? const Text(adminstatutxt)
+                : const Text(userstatutxt),
+            const Divider(),
             Text(
               "Bolge: $loginregion",
             ),
-            Divider(),
+            const Divider(),
             ElevatedButton(
                 onPressed: () {
                   showEditDialog();
                 },
                 style: ElevatedButton.styleFrom(
-                  primary: primaryColor,
+                  backgroundColor: primaryColor,
                 ),
-                child: Text(edittxt)),
+                child: const Text(edittxt)),
           ],
         ));
   }
@@ -150,17 +153,18 @@ class ProfilPage extends GetWidget<ProfilController> {
     Get.defaultDialog(
       backgroundColor: primaryColor,
       title: "Uye Duzenle / ID: $loginuserid",
-      titleStyle: TextStyle(color: borderColor),
+      titleStyle: const TextStyle(color: borderColor),
       content: Column(
         children: [
-          Text("Kullanici Adi: $loginuser", style: TextStyle(color: floor)),
+          Text("Kullanici Adi: $loginuser",
+              style: const TextStyle(color: floor)),
           SizedBox(height: Get.height * 0.02),
           Text(
             "Kullanici Eposta: $loginmail",
-            style: TextStyle(color: floor),
+            style: const TextStyle(color: floor),
           ),
           SizedBox(height: Get.height * 0.02),
-          Text(
+          const Text(
             "Kullanici Parolasi:",
             style: TextStyle(color: floor),
           ),
@@ -178,7 +182,7 @@ class ProfilPage extends GetWidget<ProfilController> {
                 decoration: InputDecoration(
                   border: InputBorder.none,
                   hintText: loginparola.obs.string,
-                  hintStyle: TextStyle(color: floor),
+                  hintStyle: const TextStyle(color: floor),
                 ),
               ),
             ),
@@ -192,9 +196,9 @@ class ProfilPage extends GetWidget<ProfilController> {
                     Get.back();
                   },
                   style: ElevatedButton.styleFrom(
-                    primary: borderColor,
+                    backgroundColor: borderColor,
                   ),
-                  child: Text(backtxt)),
+                  child: const Text(backtxt)),
               ElevatedButton(
                   onPressed: () {
                     if (controller.newparola.obs.string ==
@@ -216,9 +220,9 @@ class ProfilPage extends GetWidget<ProfilController> {
                     }
                   },
                   style: ElevatedButton.styleFrom(
-                    primary: borderColor,
+                    backgroundColor: borderColor,
                   ),
-                  child: Text(savetxt)),
+                  child: const Text(savetxt)),
             ],
           ),
         ],

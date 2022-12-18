@@ -24,8 +24,8 @@ class UsersPage extends GetWidget<UsersController> {
           title: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text(userappbartxt),
-              Divider(),
+              const Text(userappbartxt),
+              const Divider(),
               Container(
                 decoration: BoxDecoration(
                     boxShadow: [
@@ -40,10 +40,8 @@ class UsersPage extends GetWidget<UsersController> {
                   padding: const EdgeInsets.all(5.0),
                   child: TextField(
                     cursorColor: Colors.amber,
-                    onChanged: (value) {
-                      print(value);
-                    },
-                    decoration: InputDecoration(
+                    onChanged: (value) {},
+                    decoration: const InputDecoration(
                         border: InputBorder.none, hintText: searchtxt),
                   ),
                 ),
@@ -61,10 +59,10 @@ class UsersPage extends GetWidget<UsersController> {
         icon: Icon(iconum, color: colorum),
         colorText: borderColor,
         backgroundColor: floor,
-        duration: Duration(seconds: 3),
+        duration: const Duration(seconds: 3),
         titleText: Text(
-          mistaketitle,
-          style: TextStyle(fontSize: 20),
+          title,
+          style: const TextStyle(fontSize: 20),
         ));
   }
 
@@ -74,47 +72,47 @@ class UsersPage extends GetWidget<UsersController> {
       child: ListView(
         children: [
           UserAccountsDrawerHeader(
-              decoration: BoxDecoration(color: floor),
+              decoration: const BoxDecoration(color: floor),
               currentAccountPicture:
-                  CircleAvatar(backgroundImage: AssetImage(defaultimage)),
+                  const CircleAvatar(backgroundImage: AssetImage(defaultimage)),
               accountName: Text(
                 welcometxt + loginuser(),
-                style: TextStyle(color: primaryColor),
+                style: const TextStyle(color: primaryColor),
               ),
-              accountEmail:
-                  Text(loginregion(), style: TextStyle(color: primaryColor))),
-          ListTile(
+              accountEmail: Text(loginregion(),
+                  style: const TextStyle(color: primaryColor))),
+          const ListTile(
             title: Text(abouttxt, style: TextStyle(fontSize: 16, color: floor)),
             leading: Icon(Icons.info_rounded),
             iconColor: floor,
             subtitle: Text(aboutcomment,
                 style: TextStyle(fontSize: 13, color: floor)),
           ),
-          Divider(),
+          const Divider(),
           ListTile(
-              title: Text(
+              title: const Text(
                 adminbartxt,
                 style: TextStyle(fontSize: 16, color: floor),
               ),
-              leading: Icon(Icons.account_balance_rounded),
+              leading: const Icon(Icons.account_balance_rounded),
               iconColor: floor,
               onTap: () => Get.toNamed(AdminPage.routeName)),
-          Divider(),
+          const Divider(),
           ListTile(
-              title: Text(
+              title: const Text(
                 alluserstxt,
                 style: TextStyle(fontSize: 16, color: floor),
               ),
-              leading: Icon(Icons.person),
+              leading: const Icon(Icons.person),
               iconColor: floor,
               onTap: () => Get.toNamed(UsersPage.routeName)),
-          Divider(),
+          const Divider(),
           ListTile(
-              title: Text(
+              title: const Text(
                 exittxt,
                 style: TextStyle(fontSize: 16, color: floor),
               ),
-              leading: Icon(Icons.logout_outlined),
+              leading: const Icon(Icons.logout_outlined),
               iconColor: floor,
               onTap: () => Get.offAllNamed(LoginPage.routeName))
         ],
@@ -164,38 +162,41 @@ class UsersPage extends GetWidget<UsersController> {
             Text(
               "Uye No: $userid",
             ),
-            Divider(),
+            const Divider(),
             Text(
               "Kullanici Adi: $username",
-              style: TextStyle(fontWeight: FontWeight.bold),
+              style: const TextStyle(fontWeight: FontWeight.bold),
             ),
-            Divider(),
+            const Divider(),
             Text(
               "E-Posta Adresi: $email",
             ),
-            Divider(),
+            const Divider(),
             Text(
               "Kayit Tarihi: $date",
             ),
-            Divider(),
+            const Divider(),
             Text(
               "Sifre: $parola",
             ),
-            Divider(),
+            const Divider(),
             Text(
               "Bolge: $region",
             ),
-            Divider(),
-            admin == '1' ? Text(adminstatutxt) : Text(userstatutxt),
-            Divider(),
-            isremove == '1' ? Text(userpassivetxt) : Text(useractivetxt),
-            Divider(),
+            const Divider(),
+            admin == '1' ? const Text(adminstatutxt) : const Text(userstatutxt),
+            const Divider(),
+            isremove == '1'
+                ? const Text(userpassivetxt)
+                : const Text(useractivetxt),
+            const Divider(),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 ElevatedButton(
                     onPressed: () {
-                      if (admin.toString() == 0) {
+                      // ignore: unrelated_type_equality_checks
+                      if (admin.toString() == '0') {
                         admin = '1';
                       } else {
                         admin = '0';
@@ -206,9 +207,9 @@ class UsersPage extends GetWidget<UsersController> {
                       Get.toNamed(UsersPage.routeName);
                     },
                     style: ElevatedButton.styleFrom(
-                      primary: primaryColor,
+                      backgroundColor: primaryColor,
                     ),
-                    child: Text(statustxt)),
+                    child: const Text(statustxt)),
                 ElevatedButton(
                     onPressed: () {
                       if (isremove.toString() == '0') {
@@ -222,9 +223,9 @@ class UsersPage extends GetWidget<UsersController> {
                       Get.toNamed(UsersPage.routeName);
                     },
                     style: ElevatedButton.styleFrom(
-                      primary: primaryColor,
+                      backgroundColor: primaryColor,
                     ),
-                    child: Text(durumtxt)),
+                    child: const Text(durumtxt)),
               ],
             ),
             ElevatedButton(
@@ -233,9 +234,9 @@ class UsersPage extends GetWidget<UsersController> {
                       userid, username, email, parola, admin, isremove);
                 },
                 style: ElevatedButton.styleFrom(
-                  primary: primaryColor,
+                  backgroundColor: primaryColor,
                 ),
-                child: Text(edittxt)),
+                child: const Text(edittxt)),
           ],
         ));
   }
@@ -246,11 +247,11 @@ class UsersPage extends GetWidget<UsersController> {
       barrierDismissible: false,
       backgroundColor: primaryColor,
       title: "Uye Duzenle / ID: $userid",
-      titleStyle: TextStyle(color: borderColor),
+      titleStyle: const TextStyle(color: borderColor),
       content: SingleChildScrollView(
         child: Column(
           children: [
-            Text("Kullanici Adi:", style: TextStyle(color: floor)),
+            const Text("Kullanici Adi:", style: TextStyle(color: floor)),
             Container(
               decoration: BoxDecoration(
                   border: Border.all(color: borderColor),
@@ -266,13 +267,13 @@ class UsersPage extends GetWidget<UsersController> {
                   decoration: InputDecoration(
                     border: InputBorder.none,
                     hintText: username,
-                    hintStyle: TextStyle(color: floor),
+                    hintStyle: const TextStyle(color: floor),
                   ),
                 ),
               ),
             ),
             SizedBox(height: Get.height * 0.02),
-            Text(
+            const Text(
               "Kullanici Eposta:",
               style: TextStyle(color: floor),
             ),
@@ -290,13 +291,13 @@ class UsersPage extends GetWidget<UsersController> {
                   decoration: InputDecoration(
                     border: InputBorder.none,
                     hintText: email,
-                    hintStyle: TextStyle(color: floor),
+                    hintStyle: const TextStyle(color: floor),
                   ),
                 ),
               ),
             ),
             SizedBox(height: Get.height * 0.02),
-            Text(
+            const Text(
               "Kullanici Parolasi:",
               style: TextStyle(color: floor),
             ),
@@ -314,7 +315,7 @@ class UsersPage extends GetWidget<UsersController> {
                   decoration: InputDecoration(
                     border: InputBorder.none,
                     hintText: parola,
-                    hintStyle: TextStyle(color: floor),
+                    hintStyle: const TextStyle(color: floor),
                   ),
                 ),
               ),
@@ -328,9 +329,9 @@ class UsersPage extends GetWidget<UsersController> {
                       Get.back();
                     },
                     style: ElevatedButton.styleFrom(
-                      primary: borderColor,
+                      backgroundColor: borderColor,
                     ),
-                    child: Text(closetxt)),
+                    child: const Text(closetxt)),
                 ElevatedButton(
                     onPressed: () {
                       if (controller.newusername.toString() == 'null') {
@@ -356,9 +357,9 @@ class UsersPage extends GetWidget<UsersController> {
                       Get.toNamed(UsersPage.routeName);
                     },
                     style: ElevatedButton.styleFrom(
-                      primary: borderColor,
+                      backgroundColor: borderColor,
                     ),
-                    child: Text(savetxt)),
+                    child: const Text(savetxt)),
               ],
             ),
           ],

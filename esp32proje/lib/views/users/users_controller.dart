@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:esp32proje/data/services/users/model/update_request.dart';
 import 'package:esp32proje/data/services/users/user_service.dart';
 import 'package:get/state_manager.dart';
@@ -5,7 +7,6 @@ import 'package:get/state_manager.dart';
 class UsersController extends GetxController {
   final Rx<bool> isLoading = RxBool(false);
   final Rxn<dynamic> error = Rxn<dynamic>();
-
   final Rxn<List> usernamelist = Rxn();
   final Rxn<List> userMailList = Rxn();
   final Rxn<List> userRegisterDate = Rxn();
@@ -133,6 +134,7 @@ class UsersController extends GetxController {
 
   void callingUpdateService(String userid, String username, String email,
       String admin, String parola, String isremove) {
+    // ignore: no_leading_underscores_for_local_identifiers
     final UpdateRequestModel _userReguest = UpdateRequestModel(
         userid: userid,
         username: username,
